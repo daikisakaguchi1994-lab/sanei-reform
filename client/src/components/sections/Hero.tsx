@@ -1,55 +1,108 @@
 /**
  * ヒーローセクション
- * Design: フルワイドの背景画像＋オーバーレイ＋安心の宣言テキスト
- * 次章フック: 「サンエイが選ばれる3つの理由をご紹介します →」
+ * Design: スライドショー背景（3枚・自動再生5秒・ケンバーンズ効果）＋オーバーレイ＋テキスト
  */
-import { HERO_BG } from "@/lib/images";
+import { useState, useEffect } from "react";
 import { ArrowDown, ArrowRight } from "lucide-react";
 
+const SLIDES = [
+  {
+    url: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1920&q=80",
+    alt: "リフォーム後の美しいキッチン",
+  },
+  {
+    url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=80",
+    alt: "清潔感あるバスルーム",
+  },
+  {
+    url: "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=1920&q=80",
+    alt: "おしゃれなリビングインテリア",
+  },
+];
+
+const INTERVAL = 5000;
+const TRANSITION = 800;
+
 export default function Hero() {
+  const [current, setCurrent] = useState(0);
+  const [transitioning, setTransitioning] = useState(false);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTransitioning(true);
+      setTimeout(() => {
+        setCurrent((prev) => (prev + 1) % SLIDES.length);
+        setTransitioning(false);
+      }, TRANSITION);
+    }, INTERVAL);
+    return () => clearInterval(timer);
+  }, []);
+
+  const goTo = (index: number) => {
+    if (index === current) return;
+    setTransitioning(true);
+    setTimeout(() => {
+      setCurrent(index);
+      setTransitioning(false);
+    }, TRANSITION);
+  };
+
   return (
     <section
       id="hero"
-      className="relative min-h-[60vh] md:min-h-[700px] flex items-center"
+      className="relative min-h-[60vh] md:min-h-[700px] flex items-center overflow-hidden"
       style={{ paddingTop: "80px" }}
     >
-      {/* 背景画像 */}
+      {/* スライドショー背景 */}
       <div className="absolute inset-0">
-        <img
-          src={HERO_BG}
-          alt="リフォーム後の美しいリビング"
-          data-replace="hero-bg"
-          className="w-full h-full object-cover"
-        />
-        {/* <!-- 編集メモ: hero-bg を差し替え可能 --> */}
+        {SLIDES.map((slide, i) => (
+          <div
+            key={slide.url}
+            className="absolute inset-0 transition-opacity"
+            style={{
+              opacity: i === current ? (transitioning ? 0 : 1) : 0,
+              transitionDuration: `${TRANSITION}ms`,
+              transitionTimingFunction: "ease-in-out",
+            }}
+          >
+            <img
+              src={slide.url}
+              alt={slide.alt}
+              className="w-full h-full object-cover"
+              style={{
+                animation: i === current ? "kenburns 10s ease-out forwards" : "none",
+              }}
+            />
+          </div>
+        ))}
+        {/* オーバーレイ */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#1F3A5F]/85 via-[#1F3A5F]/60 to-[#1F3A5F]/30" />
       </div>
+
+      {/* ケンバーンズ用CSS */}
+      <style>{`
+        @keyframes kenburns {
+          0%   { transform: scale(1.0); }
+          100% { transform: scale(1.08); }
+        }
+      `}</style>
 
       {/* コンテンツ */}
       <div className="container relative z-10 py-16 md:py-24">
         <div className="max-w-xl">
-          <p
-            className="text-white/80 text-sm md:text-base font-medium mb-4 tracking-widest"
-            data-replace="hero-subtitle"
-          >
+          <p className="text-white/80 text-sm md:text-base font-medium mb-4 tracking-widest">
             福岡市の地域密着リフォーム会社
           </p>
-          {/* <!-- 編集メモ: hero-subtitle テキスト差し替え可能 --> */}
 
           <h1
             className="text-[24px] md:text-[36px] text-white leading-tight mb-6"
             style={{ fontFamily: '"Noto Serif JP", serif', fontWeight: 700, letterSpacing: "0.05em" }}
-            data-replace="hero-title"
           >
             <span className="block">福岡市の水回り・内装リフォームは</span>
             <span className="block">サンエイにお任せください</span>
           </h1>
-          {/* <!-- 編集メモ: hero-title テキスト差し替え可能 --> */}
 
-          <p
-            className="text-white/90 text-base md:text-lg leading-relaxed mb-8 max-w-md"
-            data-replace="hero-description"
-          >
+          <p className="text-white/90 text-base md:text-lg leading-relaxed mb-8 max-w-md">
             水回り・内装・クロス張替え・床工事まで。
             <br className="hidden md:block" />
             小さな修繕から大規模リフォームまで、
@@ -58,7 +111,6 @@ export default function Hero() {
             <br />
             <span className="text-white/80 text-sm mt-1 inline-block font-medium">無料見積り・相談受付中</span>
           </p>
-          {/* <!-- 編集メモ: hero-description テキスト差し替え可能 --> */}
 
           {/* 実績バッジ */}
           <div className="flex flex-wrap gap-3 mb-8">
@@ -98,6 +150,23 @@ export default function Hero() {
             </a>
           </div>
         </div>
+      </div>
+
+      {/* ドットインジケーター */}
+      <div className="absolute bottom-20 left-0 right-0 z-10 flex justify-center gap-2">
+        {SLIDES.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            className="rounded-full transition-all duration-300"
+            style={{
+              width: i === current ? "24px" : "8px",
+              height: "8px",
+              backgroundColor: i === current ? "#ffffff" : "rgba(255,255,255,0.5)",
+            }}
+            aria-label={`スライド${i + 1}`}
+          />
+        ))}
       </div>
 
       {/* 次章フック */}
