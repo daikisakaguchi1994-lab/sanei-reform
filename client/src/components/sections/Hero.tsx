@@ -41,8 +41,8 @@ export default function Hero() {
             style={{ fontFamily: '"Noto Serif JP", serif', fontWeight: 700, letterSpacing: "0.05em" }}
             data-replace="hero-title"
           >
-            <span className="block">福岡市の水回り・内装リフォームは</span>
-            <span className="block">サンエイにお任せください</span>
+            <span className="block">福岡市のおうちのリフォームは</span>
+            <span className="block">サンエイにお任せください。</span>
           </h1>
           {/* <!-- 編集メモ: hero-title テキスト差し替え可能 --> */}
 
@@ -50,13 +50,11 @@ export default function Hero() {
             className="text-white/90 text-base md:text-lg leading-relaxed mb-8 max-w-md"
             data-replace="hero-description"
           >
-            水回り・内装・クロス張替え・床工事まで。
+            キッチン・浴室・トイレ・洗面の水回りリフォームから、クロス張替え・フローリング・間取り変更まで。
             <br className="hidden md:block" />
-            小さな修繕から大規模リフォームまで、
+            福岡市・春日市・大野城市・太宰府市対応。
             <br className="hidden md:block" />
-            自社施工一貫体制で適正価格をお約束します。
-            <br />
-            <span className="text-white/80 text-sm mt-1 inline-block font-medium">無料見積り・相談受付中</span>
+            自社施工だから中間マージンなし、無料見積り受付中。
           </p>
           {/* <!-- 編集メモ: hero-description テキスト差し替え可能 --> */}
 
