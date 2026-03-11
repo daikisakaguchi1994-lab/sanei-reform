@@ -102,7 +102,7 @@ export default function Contact() {
                 className="w-24 h-24 rounded-lg border border-white/20"
               />
               <a
-                href="https://line.me/ti/p/~sanei_kai1105"
+                href="https://line.me/ti/p/nV5rQ8rpE7"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-auto w-full py-2.5 rounded-lg text-sm font-bold text-white text-center transition-opacity hover:opacity-85"
