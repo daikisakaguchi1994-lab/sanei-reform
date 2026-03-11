@@ -44,7 +44,7 @@ export default function MobileFixedCta() {
             LINEで相談
           </span>
           <a
-            href="https://line.me/ti/p/h91M99O59l"
+            href="https://line.me/ti/p/~sanei_kai1105"
             target="_blank"
             rel="noopener noreferrer"
             className="w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:opacity-85 transition-opacity"
@@ -74,7 +74,7 @@ export default function MobileFixedCta() {
 
         {/* LINE */}
         <a
-          href="https://line.me/ti/p/h91M99O59l"
+          href="https://line.me/ti/p/~sanei_kai1105"
           target="_blank"
           rel="noopener noreferrer"
           data-replace="line-url-mobile"

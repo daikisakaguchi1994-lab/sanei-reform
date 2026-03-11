@@ -97,7 +97,7 @@ export default function Contact() {
                 <p className="text-white/60 text-xs mt-1">24時間受付・2営業日以内に返信</p>
               </div>
               <a
-                href="https://line.me/ti/p/h91M99O59l"
+                href="https://line.me/ti/p/~sanei_kai1105"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-auto w-full py-2.5 rounded-lg text-sm font-bold text-white text-center transition-opacity hover:opacity-85"
