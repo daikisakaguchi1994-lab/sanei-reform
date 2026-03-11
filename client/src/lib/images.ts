@@ -10,10 +10,12 @@ export const COMPANY_BG = "https://private-us-east-1.manuscdn.com/sessionFile/o0
 
 // ユーザー提供の施工写真
 export const CASE_KITCHEN_AFTER = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663144760085/VuMKOlcGQUIQuwNC.jpg";
-export const CASE_BATH_BEFORE = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663144760085/txsrmueClDKTyZGm.jpg";
+export const CASE_BATH_BEFORE = "/images/bath-before.jpg";
+export const CASE_BATH_AFTER = "/images/bath-after.jpg";
 export const CASE_KITCHEN_BEFORE = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663144760085/MGyPxIEWSVlYIJuN.jpg";
 export const CASE_ROOM_BEFORE = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663144760085/YAoczKnRBuwiYTtA.jpg";
 export const CASE_WASHSTAND_BEFORE = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663144760085/SOtptsUGPRayElgo.jpg";
 export const CASE_ROOM_AFTER_1 = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663144760085/nsIMSHWocokeDgVL.jpg";
-export const CASE_ROOM_AFTER_2 = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663144760085/ysSFTHnDISpYSRfQ.jpg";
+export const CASE_ROOM_BEFORE_2 = "/images/room-before.jpg";
+export const CASE_ROOM_AFTER_2 = "/images/room-after.jpg";
 export const CASE_WASHSTAND_AFTER = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663144760085/gxuGDQiHKhcaVmGK.jpg";

@@ -4,13 +4,13 @@
  * 次章フック: 「サンエイが選ばれる3つの理由をご紹介します →」
  */
 import { HERO_BG } from "@/lib/images";
-import { Phone, ArrowDown } from "lucide-react";
+import { ArrowDown, ArrowRight } from "lucide-react";
 
 export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-[600px] md:min-h-[700px] flex items-center"
+      className="relative min-h-[60vh] md:min-h-[700px] flex items-center"
       style={{ paddingTop: "80px" }}
     >
       {/* 背景画像 */}
@@ -37,12 +37,12 @@ export default function Hero() {
           {/* <!-- 編集メモ: hero-subtitle テキスト差し替え可能 --> */}
 
           <h1
-            className="text-[28px] md:text-[40px] font-bold text-white leading-tight mb-6"
+            className="text-[24px] md:text-[36px] text-white leading-tight mb-6"
+            style={{ fontFamily: '"Noto Serif JP", serif', fontWeight: 700, letterSpacing: "0.05em" }}
             data-replace="hero-title"
           >
-            住まいの「困った」を
-            <br />
-            まるごと解決します
+            <span className="block">福岡市の水回り・内装リフォームは</span>
+            <span className="block">サンエイにお任せください</span>
           </h1>
           {/* <!-- 編集メモ: hero-title テキスト差し替え可能 --> */}
 
@@ -55,19 +55,46 @@ export default function Hero() {
             小さな修繕から大規模リフォームまで、
             <br className="hidden md:block" />
             自社施工一貫体制で適正価格をお約束します。
+            <br />
+            <span className="text-white/80 text-sm mt-1 inline-block font-medium">無料見積り・相談受付中</span>
           </p>
           {/* <!-- 編集メモ: hero-description テキスト差し替え可能 --> */}
 
+          {/* 実績バッジ */}
+          <div className="flex flex-wrap gap-3 mb-8">
+            {[
+              { num: "15", unit: "年", label: "創業" },
+              { num: "福岡県", unit: "", label: "地域密着" },
+              { num: "自社", unit: "施工", label: "中間マージンなし" },
+            ].map((badge) => (
+              <div
+                key={badge.label}
+                className="flex flex-col items-center justify-center px-4 py-2 rounded-lg"
+                style={{ backgroundColor: "rgba(255,255,255,0.15)", backdropFilter: "blur(4px)", border: "1px solid rgba(255,255,255,0.25)" }}
+              >
+                <span className="text-white font-bold text-lg leading-tight">
+                  {badge.num}<span className="text-sm">{badge.unit}</span>
+                </span>
+                <span className="text-white/70 text-[11px] leading-tight">{badge.label}</span>
+              </div>
+            ))}
+          </div>
+
           <div className="flex flex-col sm:flex-row gap-3">
-            <a href="#contact" className="cta-button">
-              無料相談・お見積もり
+            <a
+              href="#contact"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg text-lg font-bold text-white transition-opacity hover:opacity-85"
+              style={{ backgroundColor: "#2E7D32" }}
+            >
+              無料でお見積りする
             </a>
             <a
-              href="tel:092-407-4453"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white/15 backdrop-blur-sm text-white font-bold rounded-md hover:bg-white/25 transition-colors text-base"
+              href="#cases"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg text-lg font-bold border-2 border-white bg-white hover:bg-white/90 transition-colors"
+              style={{ color: "#1B4F8A" }}
             >
-              <Phone size={18} />
-              092-407-4453
+              施工事例を見る
+              <ArrowRight size={18} />
             </a>
           </div>
         </div>

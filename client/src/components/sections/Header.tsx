@@ -4,7 +4,7 @@
  * スクロールで影が付く。SPではハンバーガーメニュー。
  */
 import { useState, useEffect } from "react";
-import { Phone, Menu, X } from "lucide-react";
+import { Phone, Menu, X, MessageCircle } from "lucide-react";
 
 const NAV_ITEMS = [
   { label: "強み", href: "#strengths" },
@@ -38,11 +38,11 @@ export default function Header() {
     >
       {/* 上部バー: 電話番号 */}
       <div className="hidden md:block border-b border-white/10">
-        <div className="container flex justify-end items-center py-1.5 text-white/80 text-[13px]">
-          <span>平日 9:00〜17:00</span>
-          <span className="mx-2">|</span>
-          <a href="tel:092-407-4453" className="flex items-center gap-1 hover:text-white transition-colors">
-            <Phone size={13} />
+        <div className="container flex justify-end items-center py-2 text-white/80">
+          <span className="text-xs">平日 9:00〜17:00</span>
+          <span className="mx-2 text-xs">|</span>
+          <a href="tel:092-407-4453" className="flex items-center gap-1.5 hover:text-white transition-colors font-bold text-sm">
+            <Phone size={14} />
             092-407-4453
           </a>
         </div>
@@ -76,8 +76,18 @@ export default function Header() {
             </a>
           ))}
           <a
+            href="https://line.me/ti/p/h91M99O59l"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 px-4 py-2 text-sm font-bold rounded-full text-white hover:opacity-80 transition-opacity"
+            style={{ backgroundColor: "#06C755" }}
+          >
+            <MessageCircle size={15} />
+            LINEで相談
+          </a>
+          <a
             href="#contact"
-            className="ml-2 px-5 py-2 text-sm font-bold rounded"
+            className="px-5 py-2 text-sm font-bold rounded"
             style={{ backgroundColor: "#2E7D32", color: "#FFFFFF" }}
           >
             お問い合わせ
@@ -88,10 +98,11 @@ export default function Header() {
         <div className="flex items-center gap-3 lg:hidden">
           <a
             href="tel:092-407-4453"
-            className="flex items-center justify-center w-10 h-10 rounded-full bg-white/15 text-white"
+            className="flex items-center gap-1.5 text-white"
             aria-label="電話をかける"
           >
-            <Phone size={20} />
+            <Phone size={16} />
+            <span className="text-sm font-bold">092-407-4453</span>
           </a>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
@@ -118,9 +129,20 @@ export default function Header() {
               </a>
             ))}
             <a
+              href="https://line.me/ti/p/h91M99O59l"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={handleNavClick}
+              className="mt-2 py-3 text-center font-bold rounded text-white flex items-center justify-center gap-2"
+              style={{ backgroundColor: "#06C755" }}
+            >
+              <MessageCircle size={18} />
+              LINEで相談
+            </a>
+            <a
               href="#contact"
               onClick={handleNavClick}
-              className="mt-2 py-3 text-center font-bold rounded text-white"
+              className="py-3 text-center font-bold rounded text-white"
               style={{ backgroundColor: "#2E7D32" }}
             >
               お問い合わせ

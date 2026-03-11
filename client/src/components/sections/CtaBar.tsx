@@ -33,7 +33,7 @@ export default function CtaBar({ message = "リフォームのこと、まずは
           </a>
         </div>
         <p className="text-white/60 text-xs mt-4">
-          受付時間：平日 9:00〜17:00 ／ 繋がらない場合：080-4277-9209
+          受付時間：平日 9:00〜17:00 ／ お急ぎの方は直通番号へ：080-4277-9209
         </p>
       </div>
     </div>

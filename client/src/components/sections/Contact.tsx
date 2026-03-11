@@ -38,57 +38,69 @@ export default function Contact() {
           {/* 連絡手段 */}
           <div className="fade-in grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
             {/* 電話 */}
-            <a
-              href="tel:092-407-4453"
-              className="flex flex-col items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-white/15 transition-colors"
-            >
+            <div className="flex flex-col items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-6">
               <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center">
                 <Phone size={24} className="text-white" />
               </div>
-              <div>
-                <p className="text-white font-bold text-lg">お電話</p>
-                <p className="text-white/90 text-xl font-bold mt-1">092-407-4453</p>
-                <p className="text-white/60 text-xs mt-1">平日 9:00〜17:00</p>
+              <div className="text-center">
+                <p className="text-white font-bold text-base">📞 電話で相談</p>
+                <p className="text-white/90 text-lg font-bold mt-1">092-407-4453</p>
+                <p className="text-white/60 text-xs mt-1">受付時間：平日 9:00〜18:00</p>
               </div>
-            </a>
+              <a
+                href="tel:092-407-4453"
+                className="mt-auto w-full py-2.5 rounded-lg text-sm font-bold text-white text-center transition-opacity hover:opacity-85"
+                style={{ backgroundColor: "#1B4F8A" }}
+              >
+                電話をかける
+              </a>
+            </div>
 
             {/* LINE */}
-            <a
-              href="https://line.me/ti/p/h91M99O59l"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex flex-col items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-white/15 transition-colors"
-            >
-              {/* <!-- 編集メモ: line-url のhrefをLINEリンクに差し替え --> */}
+            <div className="flex flex-col items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-6">
               <div className="w-14 h-14 rounded-full bg-[#06C755]/80 flex items-center justify-center">
                 <MessageCircle size={24} className="text-white" />
               </div>
-              <div>
-                <p className="text-white font-bold text-lg">LINE</p>
-                <p className="text-white/70 text-sm mt-1">友だち追加で<br />お気軽にご相談</p>
-                <p className="text-white/60 text-xs mt-1">24時間受付<br />2営業日以内に返信</p>
+              <div className="text-center">
+                <p className="text-white font-bold text-base">💬 LINEで相談</p>
+                <p className="text-white/70 text-sm mt-1">気軽にメッセージを送る</p>
+                <p className="text-white/60 text-xs mt-1">24時間受付・2営業日以内に返信</p>
               </div>
-            </a>
+              <a
+                href="https://line.me/ti/p/h91M99O59l"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-auto w-full py-2.5 rounded-lg text-sm font-bold text-white text-center transition-opacity hover:opacity-85"
+                style={{ backgroundColor: "#06C755" }}
+              >
+                LINEで送る
+              </a>
+            </div>
 
-            {/* メール */}
-            <a
-              href="mailto:sanei_kai1105@yahoo.co.jp"
-              className="flex flex-col items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-white/15 transition-colors"
-            >
+            {/* フォーム */}
+            <div className="flex flex-col items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-6">
               <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center">
                 <Mail size={24} className="text-white" />
               </div>
-              <div>
-                <p className="text-white font-bold text-lg">メール</p>
-                <p className="text-white/70 text-sm mt-1">24時間受付<br />2営業日以内に返信</p>
+              <div className="text-center">
+                <p className="text-white font-bold text-base">✉️ フォームで相談</p>
+                <p className="text-white/70 text-sm mt-1">24時間受付中</p>
+                <p className="text-white/60 text-xs mt-1">2営業日以内に返信</p>
               </div>
-            </a>
+              <a
+                href="#contact-form"
+                className="mt-auto w-full py-2.5 rounded-lg text-sm font-bold text-white text-center transition-opacity hover:opacity-85"
+                style={{ backgroundColor: "#2E7D32" }}
+              >
+                フォームへ
+              </a>
+            </div>
           </div>
 
           {/* 携帯番号 */}
           <div className="fade-in">
             <p className="text-white/50 text-sm">
-              お電話が繋がらない場合は直通番号へ：
+              お電話が繋がらない場合や、お急ぎの方は直通番号へご連絡ください。：
               <a href="tel:080-4277-9209" className="text-white/70 hover:text-white transition-colors font-medium">
                 080-4277-9209
               </a>
@@ -96,7 +108,7 @@ export default function Contact() {
           </div>
 
           {/* お問い合わせフォーム */}
-          <div className="fade-in mt-10 bg-white/10 backdrop-blur-sm rounded-lg p-6 md:p-8 text-left">
+          <div id="contact-form" className="fade-in mt-10 bg-white/10 backdrop-blur-sm rounded-lg p-6 md:p-8 text-left">
             <h3 className="text-white font-bold text-lg mb-6 text-center">お問い合わせフォーム</h3>
             <form className="space-y-4">
               {/* お名前 */}
@@ -231,7 +243,7 @@ export default function Contact() {
                 className="w-full py-3.5 rounded-lg font-bold text-white text-base transition-opacity hover:opacity-90"
                 style={{ backgroundColor: "#2E7D32" }}
               >
-                送信する
+                無料でお見積りを依頼する
               </button>
             </form>
           </div>

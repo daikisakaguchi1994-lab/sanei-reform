@@ -49,6 +49,26 @@ export default function Strengths() {
           </h2>
         </div>
 
+        {/* 実績数字バー */}
+        <div className="fade-in grid grid-cols-3 gap-4 mb-12 md:mb-16 max-w-2xl mx-auto">
+          {[
+            { num: "15", unit: "年", label: "創業" },
+            { num: "福岡県", unit: "", label: "全域対応" },
+            { num: "0", unit: "円", label: "お見積もり" },
+          ].map((item) => (
+            <div
+              key={item.label}
+              className="text-center py-5 rounded-lg"
+              style={{ backgroundColor: "#F7F8FA" }}
+            >
+              <div className="text-[28px] md:text-[36px] font-bold leading-none mb-1" style={{ color: "#1F3A5F" }}>
+                {item.num}<span className="text-base md:text-lg">{item.unit}</span>
+              </div>
+              <div className="text-xs md:text-sm font-medium" style={{ color: "#666" }}>{item.label}</div>
+            </div>
+          ))}
+        </div>
+
         {/* 3カラムカード */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {STRENGTHS.map((item, i) => {

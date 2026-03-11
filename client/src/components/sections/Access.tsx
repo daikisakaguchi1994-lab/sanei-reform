@@ -106,6 +106,50 @@ export default function Access() {
           </div>
         </div>
 
+        {/* 口コミ依頼ブロック */}
+        <div className="fade-in mt-10 bg-white rounded-lg shadow-sm p-6 md:p-8">
+          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
+            {/* テキスト */}
+            <div className="flex-1 text-center md:text-left">
+              <p className="text-xs font-medium tracking-[0.15em] mb-2" style={{ color: "#1F3A5F" }}>
+                REVIEW
+              </p>
+              <h3 className="text-lg font-bold mb-3" style={{ color: "#1F3A5F" }}>
+                口コミをお願いします
+              </h3>
+              <p className="text-[14px] leading-relaxed mb-4" style={{ color: "#555" }}>
+                この度はサンエイにご依頼いただき、誠にありがとうございました。<br />
+                お客様からの率直なご感想が、私たちの励みとなり、<br className="hidden md:block" />
+                次のお客様への信頼にもつながります。<br />
+                よろしければ、Googleにて口コミを投稿いただけますと幸いです。
+              </p>
+              <a
+                href="https://g.page/r/CR1DdmzhvZ58EBE/review"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg text-sm font-bold text-white transition-opacity hover:opacity-90"
+                style={{ backgroundColor: "#2E7D32" }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+                Googleで口コミを書く
+              </a>
+            </div>
+            {/* QRコード */}
+            <div className="flex flex-col items-center gap-2 flex-shrink-0">
+              <img
+                src="/images/review-qr.png"
+                alt="Google口コミ QRコード"
+                className="w-32 h-32 rounded-lg"
+              />
+              <p className="text-xs text-center" style={{ color: "#999" }}>
+                QRコードからも<br />投稿できます
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* 次章フック */}
         <div className="text-center mt-12 fade-in">
           <a
