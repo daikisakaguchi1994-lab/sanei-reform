@@ -96,6 +96,11 @@ export default function Contact() {
                 <p className="text-white/70 text-sm mt-1">気軽にメッセージを送る</p>
                 <p className="text-white/60 text-xs mt-1">24時間受付・2営業日以内に返信</p>
               </div>
+              <img
+                src="/line-qr.png"
+                alt="LINE友達追加QRコード"
+                className="w-24 h-24 rounded-lg border border-white/20"
+              />
               <a
                 href="https://line.me/ti/p/~sanei_kai1105"
                 target="_blank"
