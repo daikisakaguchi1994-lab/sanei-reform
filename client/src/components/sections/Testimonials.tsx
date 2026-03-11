@@ -276,7 +276,7 @@ export default function Testimonials() {
         {/* Googleマップ口コミリンク */}
         <div className="text-center mt-10 fade-in">
           <a
-            href="https://www.google.com/maps?q=33.5517239,130.3290875"
+            href="https://www.google.co.jp/maps/place/%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%82%B5%E3%83%B3%E3%82%A8%E3%82%A4/@33.5517283,130.3265126,17z/data=!3m1!4b1!4m6!3m5!1s0x354194bfd9ac236f:0x7c9ebde16c76431d!8m2!3d33.5517239!4d130.3290875!16s%2Fg%2F11b5pklx1v"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-bold border-2 hover:opacity-80 transition-opacity"
