@@ -160,7 +160,7 @@ export default function Cases() {
             WORKS
           </p>
           <h2 className="section-heading text-[22px] md:text-[28px]">
-            施工事例
+            福岡市内の施工事例
           </h2>
           <p className="mt-4 text-[15px]" style={{ color: "#666" }}>
             実際の施工写真をビフォー・アフターでご紹介します。

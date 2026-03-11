@@ -24,7 +24,9 @@ export default function Footer() {
             <p className="text-white/50 text-sm leading-relaxed">
               〒814-0165<br />
               福岡県福岡市早良区次郎丸4-1-45<br />
-              TEL: 092-407-4453
+              TEL: 092-407-4453<br />
+              営業時間: 平日 9:00〜18:00 / 土曜 9:00〜17:00<br />
+              定休日: 日曜・祝日
             </p>
           </div>
 
