@@ -75,7 +75,7 @@ export default function Contact() {
               <div className="text-center">
                 <p className="text-white font-bold text-base">📞 電話で相談</p>
                 <p className="text-white/90 text-lg font-bold mt-1">092-407-4453</p>
-                <p className="text-white/60 text-xs mt-1">受付時間：平日 9:00〜18:00</p>
+                <p className="text-white/60 text-xs mt-1">受付時間：平日 9:00〜17:00（土日祝定休）</p>
               </div>
               <a
                 href="tel:092-407-4453"
