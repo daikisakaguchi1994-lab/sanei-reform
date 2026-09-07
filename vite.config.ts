@@ -162,6 +162,8 @@ export default defineConfig({
     },
   },
   envDir: path.resolve(import.meta.dirname),
+  // VITE_ に加え、Behold ウィジェット用の PUBLIC_ プレフィックスもクライアントへ公開
+  envPrefix: ["VITE_", "PUBLIC_"],
   root: path.resolve(import.meta.dirname, "client"),
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),

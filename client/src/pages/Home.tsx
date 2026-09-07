@@ -1,7 +1,7 @@
 /**
  * ホームページ（メインページ）
  * Design: 「街の信頼」コーポレートモダン × ローカルトラスト
- * セクション順: Hero → 強み → サービス → CTA → 施工の流れ → 施工事例 → CTA → お客様の声 → 会社紹介 → FAQ → アクセス → お問い合わせ → フッター
+ * セクション順: Hero → 強み → サービス → CTA → 施工の流れ → 施工事例 → Instagram → CTA → お客様の声 → 会社紹介 → FAQ → アクセス → お問い合わせ → フッター
  */
 import Header from "@/components/sections/Header";
 import Hero from "@/components/sections/Hero";
@@ -10,6 +10,7 @@ import Services from "@/components/sections/Services";
 import CtaBar from "@/components/sections/CtaBar";
 import Flow from "@/components/sections/Flow";
 import Cases from "@/components/sections/Cases";
+import InstagramFeed from "@/components/sections/InstagramFeed";
 import Testimonials from "@/components/sections/Testimonials";
 import Company from "@/components/sections/Company";
 import Faq from "@/components/sections/Faq";
@@ -42,6 +43,9 @@ export default function Home() {
 
         {/* 5. 施工事例（証拠） */}
         <Cases />
+
+        {/* 5-2. Instagram施工事例フィード（Behold・投稿で自動反映） */}
+        <InstagramFeed />
 
         {/* 中間CTA */}
         <CtaBar message="気になる工事がありましたら、お気軽にお問い合わせください" />
