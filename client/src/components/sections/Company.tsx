@@ -1,11 +1,18 @@
 /**
  * 会社紹介・代表挨拶セクション（顔の見える信頼）
- * Design: 単色グレー背景。代表挨拶は2カラム（左テキスト／右にオフィス写真カード）、
+ * Design: 単色グレー背景。代表挨拶は1カラムの白カード（引用符アイコン＋実績バッジ＋本文）、
  *         その下に会社概要テーブルの白カード。
  * 次章フック: 「よくあるご質問にお答えします →」
  */
 import { useFadeIn } from "@/hooks/useFadeIn";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Quote } from "lucide-react";
+
+// 会社概要（創業年・対応エリア・自社施工体制）から抜粋。Heroの実績バッジと同じスタイル。
+const CEO_BADGES = [
+  { num: "15", unit: "年", label: "創業" },
+  { num: "福岡市", unit: "", label: "対応エリア" },
+  { num: "自社", unit: "施工", label: "一貫体制" },
+];
 
 export default function Company() {
   const ref = useFadeIn();
@@ -23,13 +30,43 @@ export default function Company() {
           </h2>
         </div>
 
-        {/* 代表挨拶（2カラム：左テキスト／右オフィス写真。モバイルは縦積みでテキスト→写真） */}
-        <div className="fade-in mb-10 flex flex-col md:flex-row gap-8 md:gap-12 md:items-center">
-          {/* テキスト */}
-          <div className="md:flex-1" data-replace="ceo-message">
+        {/* 代表挨拶（代表者本人の言葉。1カラムの白カード） */}
+        <div className="fade-in bg-white rounded-lg p-6 md:p-10 mb-10">
+          {/* 代表者本人の言葉であることを示す引用符 */}
+          <Quote
+            size={32}
+            className="mb-3"
+            style={{ color: "#1F3A5F", opacity: 0.25 }}
+            aria-hidden="true"
+          />
+
+          <div data-replace="ceo-message">
             <h3 className="text-xl font-bold mb-4" style={{ color: "#1F3A5F" }}>
               地域の皆様の暮らしに寄り添い続けます
             </h3>
+
+            {/* 実績バッジ（Heroと同じスタイルを白背景向けの配色に調整） */}
+            <div className="flex flex-wrap gap-3 mb-6">
+              {CEO_BADGES.map((badge) => (
+                <div
+                  key={badge.label}
+                  className="flex flex-col items-center justify-center px-4 py-2 rounded-lg"
+                  style={{
+                    backgroundColor: "rgba(31,58,95,0.06)",
+                    border: "1px solid rgba(31,58,95,0.15)",
+                  }}
+                >
+                  <span className="font-bold text-lg leading-tight" style={{ color: "#1F3A5F" }}>
+                    {badge.num}
+                    <span className="text-sm">{badge.unit}</span>
+                  </span>
+                  <span className="text-[11px] leading-tight" style={{ color: "rgba(31,58,95,0.6)" }}>
+                    {badge.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+
             <div className="space-y-4 text-[15px] leading-relaxed" style={{ color: "#555" }}>
               <p>
                 株式会社サンエイのホームページをご覧いただき、ありがとうございます。代表の甲斐一也です。
@@ -43,19 +80,6 @@ export default function Company() {
               <p>
                 住まいのことで何かお困りのことがございましたら、どうぞお気軽にご相談ください。
               </p>
-            </div>
-          </div>
-
-          {/* オフィス写真カード（フルカラー・暗幕なし。他セクションの画像カードと同じ角丸＋軽いシャドウ） */}
-          <div className="w-full md:w-[44%] md:shrink-0">
-            <div className="rounded-lg overflow-hidden shadow-md">
-              <img
-                src="/images/sanei_office_final.png"
-                alt="株式会社サンエイのオフィス（福岡市早良区次郎丸）"
-                className="w-full aspect-[4/3] object-cover"
-                loading="lazy"
-                data-replace="company-office"
-              />
             </div>
           </div>
         </div>
