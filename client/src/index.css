@@ -184,10 +184,6 @@
     background-color: #1F3A5F;
     border-radius: 2px;
   }
-  /* 会社紹介セクションは背景写真＋暗幕のため、見出しアクセントバーを白に */
-  #company .section-heading::before {
-    background-color: #FFFFFF;
-  }
 
   /* CTA button */
   .cta-button {

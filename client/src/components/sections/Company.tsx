@@ -1,7 +1,7 @@
 /**
  * 会社紹介・代表挨拶セクション（顔の見える信頼）
- * Design: 実オフィス写真（sanei_office_final.png）を全面背景に敷き、
- *         暗いネイビーの暗幕を重ねる。代表挨拶・会社概要・法人案内は白カードで可読性を確保。
+ * Design: 単色グレー背景。代表挨拶は2カラム（左テキスト／右にオフィス写真カード）、
+ *         その下に会社概要テーブルの白カード。
  * 次章フック: 「よくあるご質問にお答えします →」
  */
 import { useFadeIn } from "@/hooks/useFadeIn";
@@ -11,45 +11,22 @@ export default function Company() {
   const ref = useFadeIn();
 
   return (
-    <section
-      id="company"
-      className="section-padding relative"
-      style={{
-        backgroundColor: "#1F3A5F", // 画像読込前／失敗時のフォールバック
-        backgroundImage: "url('/images/sanei_office_final.png')",
-        backgroundSize: "cover",
-        backgroundPosition: "55% 38%", // ロゴ（壁面「Sanei Co., Ltd.」）が極端に切れない位置
-        backgroundRepeat: "no-repeat",
-      }}
-      ref={ref}
-    >
-      {/* 背景写真の上に敷く暗いネイビーの暗幕。白カード外の見出し・リンクの可読性を確保 */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{ backgroundColor: "rgba(31, 58, 95, 0.72)" }}
-        aria-hidden="true"
-      />
-
-      <div className="container relative">
+    <section id="company" className="section-padding" style={{ backgroundColor: "#F7F8FA" }} ref={ref}>
+      <div className="container">
         {/* セクション見出し */}
         <div className="mb-12 md:mb-16 fade-in">
-          <p
-            className="text-sm font-medium tracking-[0.15em] mb-3"
-            style={{ color: "#FFFFFF", textShadow: "0 1px 3px rgba(0,0,0,0.35)" }}
-          >
+          <p className="text-sm font-medium tracking-[0.15em] mb-3" style={{ color: "#1F3A5F" }}>
             COMPANY
           </p>
-          <h2
-            className="section-heading text-[22px] md:text-[28px] text-white"
-            style={{ textShadow: "0 1px 3px rgba(0,0,0,0.35)" }}
-          >
+          <h2 className="section-heading text-[22px] md:text-[28px]">
             会社紹介・代表挨拶
           </h2>
         </div>
 
-        {/* 代表挨拶 */}
-        <div className="fade-in bg-white rounded-lg p-6 md:p-10 mb-10">
-          <div data-replace="ceo-message">
+        {/* 代表挨拶（2カラム：左テキスト／右オフィス写真。モバイルは縦積みでテキスト→写真） */}
+        <div className="fade-in mb-10 flex flex-col md:flex-row gap-8 md:gap-12 md:items-center">
+          {/* テキスト */}
+          <div className="md:flex-1" data-replace="ceo-message">
             <h3 className="text-xl font-bold mb-4" style={{ color: "#1F3A5F" }}>
               地域の皆様の暮らしに寄り添い続けます
             </h3>
@@ -66,6 +43,19 @@ export default function Company() {
               <p>
                 住まいのことで何かお困りのことがございましたら、どうぞお気軽にご相談ください。
               </p>
+            </div>
+          </div>
+
+          {/* オフィス写真カード（フルカラー・暗幕なし。他セクションの画像カードと同じ角丸＋軽いシャドウ） */}
+          <div className="w-full md:w-[44%] md:shrink-0">
+            <div className="rounded-lg overflow-hidden shadow-md">
+              <img
+                src="/images/sanei_office_final.png"
+                alt="株式会社サンエイのオフィス（福岡市早良区次郎丸）"
+                className="w-full aspect-[4/3] object-cover"
+                loading="lazy"
+                data-replace="company-office"
+              />
             </div>
           </div>
         </div>
@@ -126,12 +116,12 @@ export default function Company() {
           </p>
         </div>
 
-        {/* 次章フック（暗幕上のため白文字） */}
+        {/* 次章フック */}
         <div className="text-center mt-12 fade-in">
           <a
             href="#faq"
             className="inline-flex items-center gap-2 text-sm font-medium hover:opacity-70 transition-opacity"
-            style={{ color: "#FFFFFF", textShadow: "0 1px 3px rgba(0,0,0,0.35)" }}
+            style={{ color: "#1F3A5F" }}
           >
             よくあるご質問にお答えします
             <ArrowRight size={16} />
