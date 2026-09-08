@@ -3,6 +3,8 @@
  * Design: 白背景、施工事例（Cases）の直後に配置。Instagramに投稿すると自動反映される。
  * SEO: 「フルリフォーム」「福岡市」「デザインをオシャレに」を見出し・本文に自然に反映
  * 次章フック: 施工事例 → Instagram → 中間CTA の流れで社会的証明を強化
+ *
+ * feed-id 未設定の間は、Instagram公式アカウントへのリンクボタンをフォールバック表示する。
  */
 import { useEffect } from "react";
 import { useFadeIn } from "@/hooks/useFadeIn";
@@ -74,15 +76,32 @@ export default function InstagramFeed() {
           {IS_CONFIGURED ? (
             <behold-widget feed-id={FEED_ID} />
           ) : (
+            /*
+             * feed-id 未設定時のフォールバック（Instagram公式アカウントへの誘導）。
+             * Behold.so で feed-id を発行し、環境変数 PUBLIC_BEHOLD_FEED_ID を設定すると、
+             * 上の <behold-widget> 表示に自動で切り替わり、この分岐は表示されなくなる。
+             */
             <div
               className="w-full h-full flex flex-col items-center justify-center text-center px-6 py-16 rounded-lg"
               style={{ backgroundColor: "#E8EDF3", color: "#5B6B7C", minHeight: "clamp(360px, 60vw, 520px)" }}
             >
               <Instagram size={40} className="mb-4" aria-hidden="true" />
-              <p className="text-sm font-medium">Instagram連携（施工事例フィード）は準備中です</p>
-              <p className="text-xs mt-2">
-                Behold.so の feed-id 発行後、環境変数 PUBLIC_BEHOLD_FEED_ID を設定すると自動表示されます
+              <p className="text-base md:text-lg font-bold" style={{ color: "#1F3A5F" }}>
+                Instagramで施工事例をチェック
               </p>
+              <p className="text-sm mt-2">
+                最新の施工事例はInstagramで随時更新しています。
+              </p>
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-bold text-white transition-opacity hover:opacity-85"
+                style={{ backgroundColor: "#1F3A5F" }}
+              >
+                <Instagram size={18} aria-hidden="true" />
+                Instagramで見る
+              </a>
             </div>
           )}
         </div>
