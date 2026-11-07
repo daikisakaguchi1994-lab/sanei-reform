@@ -179,7 +179,9 @@ export default function Hero() {
           >
             キッチン・浴室・トイレ・洗面の水回りリフォームから、クロス張替え・フローリング・間取り変更まで。
             <br className="hidden md:block" />
-            福岡市・春日市・大野城市・太宰府市・糸島市対応、他のエリアもご相談ください。
+            福岡市・春日市・大野城市・太宰府市・糸島市対応。
+            <br className="hidden md:block" />
+            他のエリアもご相談ください。
             <br className="hidden md:block" />
             自社が責任を持って施工を管理します。無料見積り受付中。
           </p>
