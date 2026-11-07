@@ -239,10 +239,34 @@ html {
   scroll-behavior: smooth;
 }
 
-/* ヒーロー1枚目: 縦長の画面では中央が切り取られるため、人物（右側）が残る横位置にする */
-@media (max-aspect-ratio: 1/1) {
-  .hero-pos-family {
-    object-position: 72% 50%;
+/* ヒーローの見出し。スマホは14文字が1行に収まる大きさ（左右の余白16pxを引いた幅から計算） */
+.hero-title {
+  font-family: "Noto Serif JP", serif;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.42;
+  font-size: min(calc((100vw - 32px) / 14.4), 28px);
+}
+@media (min-width: 768px) {
+  .hero-title {
+    font-size: 34px;
+    line-height: 1.36;
+  }
+}
+@media (min-width: 1024px) {
+  .hero-title {
+    font-size: 44px;
+  }
+}
+
+/* ヒーローの暗幕（PC）。文字の載る左側だけ暗くし、右側は写真をそのまま見せる */
+.hero-shade {
+  background: linear-gradient(90deg, rgba(20, 38, 66, 0.92) 0%, rgba(20, 38, 66, 0.82) 36%, rgba(20, 38, 66, 0.42) 58%, rgba(20, 38, 66, 0) 76%);
+}
+/* 画面が狭いほど文字が右まで届くので、暗い範囲を広げる */
+@media (max-width: 1279px) {
+  .hero-shade {
+    background: linear-gradient(90deg, rgba(20, 38, 66, 0.92) 0%, rgba(20, 38, 66, 0.86) 60%, rgba(20, 38, 66, 0.5) 85%, rgba(20, 38, 66, 0.2) 100%);
   }
 }
 
