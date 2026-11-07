@@ -114,7 +114,7 @@ export default function InstagramFeed() {
                 className="h-full w-full object-cover"
                 loading="lazy"
               />
-              <span className="absolute inset-x-0 bottom-0 bg-black/45 py-0.5 text-center text-[10px] font-medium text-white">
+              <span className="absolute inset-x-0 bottom-0 bg-black/45 py-0.5 text-center text-xs font-medium text-white">
                 {t.label}
               </span>
             </button>

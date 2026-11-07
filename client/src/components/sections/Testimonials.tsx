@@ -173,7 +173,7 @@ export default function Testimonials() {
                   {item.type}
                 </span>
                 {item.date && (
-                  <span className="text-xs" style={{ color: "#999" }}>{item.date}</span>
+                  <span className="text-xs" style={{ color: "#666" }}>{item.date}</span>
                 )}
               </div>
               <div className="flex gap-0.5 mb-2">
@@ -187,7 +187,7 @@ export default function Testimonials() {
               <p className="text-[14px] leading-relaxed mb-4" style={{ color: "#555" }}>
                 {item.body}
               </p>
-              <p className="text-xs" style={{ color: "#999" }}>
+              <p className="text-xs" style={{ color: "#666" }}>
                 — {item.name}
               </p>
             </div>
@@ -241,7 +241,7 @@ export default function Testimonials() {
                     </svg>
                     Google口コミ
                   </span>
-                  <span className="text-xs" style={{ color: "#999" }}>{item.date}</span>
+                  <span className="text-xs" style={{ color: "#666" }}>{item.date}</span>
                 </div>
 
                 {/* 工事種別 */}

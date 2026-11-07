@@ -60,7 +60,7 @@ export default function Header() {
           </svg>
           <div className="text-white">
             <div className="text-lg md:text-xl font-bold leading-tight tracking-wide">SANEI</div>
-            <div className="text-[10px] md:text-xs leading-tight opacity-80">株式会社サンエイ</div>
+            <div className="text-xs leading-tight opacity-80">株式会社サンエイ</div>
           </div>
         </a>
 
@@ -99,7 +99,7 @@ export default function Header() {
           <a
             href="tel:092-407-4453"
             className="relative flex items-center gap-1.5 text-white before:absolute before:-inset-y-3 before:inset-x-0 before:content-['']"
-            aria-label="電話をかける"
+            aria-label="電話をかける 092-407-4453"
           >
             <Phone size={16} />
             <span className="text-sm font-bold">092-407-4453</span>

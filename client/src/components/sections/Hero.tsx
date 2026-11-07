@@ -123,20 +123,20 @@ export default function Hero() {
           <div className="hero-shade absolute inset-0 hidden md:block" />
 
           {SHOW_PHOTO_NOTE && (
-            <span className="absolute right-2 top-2 rounded bg-black/45 px-1.5 py-1 text-[11px] leading-none text-white md:bottom-2 md:top-auto">
+            <span className="absolute right-2 top-2 rounded bg-black/45 px-1.5 py-1 text-xs leading-none text-white md:bottom-2 md:top-auto">
               画像はイメージです
             </span>
           )}
 
           {/* 写真の切り替え */}
           {slides.length > 1 && (
-            <div className="absolute inset-x-0 bottom-7 z-10 flex items-center justify-center gap-2 md:bottom-3">
+            <div className="absolute inset-x-0 bottom-7 z-10 flex items-center justify-center gap-4 md:bottom-3">
               {slides.map((slide, i) => (
                 <button
                   key={slide.base}
                   type="button"
                   onClick={() => setCurrent(i)}
-                  className="relative rounded-full shadow-[0_0_4px_rgba(0,0,0,.45)] transition-all duration-300 before:absolute before:-inset-x-0.5 before:-inset-y-[18px] before:content-['']"
+                  className="relative rounded-full shadow-[0_0_4px_rgba(0,0,0,.45)] transition-all duration-300 before:absolute before:-inset-x-2 before:-inset-y-[18px] before:content-['']"
                   style={{
                     width: i === active ? "24px" : "8px",
                     height: "8px",

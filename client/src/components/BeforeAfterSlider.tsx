@@ -75,7 +75,7 @@ export default function BeforeAfterSlider({
         loading="lazy"
       />
       <span
-        className="absolute right-3 top-3 z-10 rounded-full px-2.5 py-1 text-[11px] font-bold text-white"
+        className="absolute right-3 top-3 z-10 rounded-full px-2.5 py-1 text-xs font-bold text-white"
         style={{ backgroundColor: "rgba(46,125,50,0.92)" }}
       >
         {afterLabel}
@@ -91,7 +91,7 @@ export default function BeforeAfterSlider({
           loading="lazy"
         />
         <span
-          className="absolute left-3 top-3 rounded-full px-2.5 py-1 text-[11px] font-bold text-white"
+          className="absolute left-3 top-3 rounded-full px-2.5 py-1 text-xs font-bold text-white"
           style={{ backgroundColor: "rgba(31,58,95,0.92)" }}
         >
           {beforeLabel}

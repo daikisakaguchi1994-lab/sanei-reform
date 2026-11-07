@@ -60,7 +60,7 @@ export default function Company() {
                     {badge.num}
                     <span className="text-sm">{badge.unit}</span>
                   </span>
-                  <span className="text-[11px] leading-tight" style={{ color: "rgba(31,58,95,0.6)" }}>
+                  <span className="text-xs leading-tight" style={{ color: "rgba(31,58,95,0.6)" }}>
                     {badge.label}
                   </span>
                 </div>

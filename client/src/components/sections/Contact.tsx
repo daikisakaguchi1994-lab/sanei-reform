@@ -48,7 +48,7 @@ export default function Contact() {
         <div className="max-w-2xl mx-auto text-center">
           {/* 見出し */}
           <div className="fade-in mb-8">
-            <p className="text-sm font-medium tracking-[0.15em] mb-3 text-white/60">
+            <p className="text-sm font-medium tracking-[0.15em] mb-3 text-white/75">
               CONTACT
             </p>
             <h2 className="text-[22px] md:text-[28px] font-bold text-white mb-4">
@@ -75,7 +75,7 @@ export default function Contact() {
               <div className="text-center">
                 <p className="text-white font-bold text-base">📞 電話で相談</p>
                 <p className="text-white/90 text-lg font-bold mt-1">092-407-4453</p>
-                <p className="text-white/60 text-xs mt-1">受付時間：平日 9:00〜17:00（土日祝定休）</p>
+                <p className="text-white/75 text-xs mt-1">受付時間：平日 9:00〜17:00（土日祝定休）</p>
               </div>
               <a
                 href="tel:092-407-4453"
@@ -94,7 +94,7 @@ export default function Contact() {
               <div className="text-center">
                 <p className="text-white font-bold text-base">💬 LINEで相談</p>
                 <p className="text-white/70 text-sm mt-1">気軽にメッセージを送る</p>
-                <p className="text-white/60 text-xs mt-1">24時間受付・2営業日以内に返信</p>
+                <p className="text-white/75 text-xs mt-1">24時間受付・2営業日以内に返信</p>
               </div>
               <img
                 src="/line-qr.png"
@@ -120,7 +120,7 @@ export default function Contact() {
               <div className="text-center">
                 <p className="text-white font-bold text-base">✉️ フォームで相談</p>
                 <p className="text-white/70 text-sm mt-1">24時間受付中</p>
-                <p className="text-white/60 text-xs mt-1">2営業日以内に返信</p>
+                <p className="text-white/75 text-xs mt-1">2営業日以内に返信</p>
               </div>
               <a
                 href="#contact-form"
@@ -134,7 +134,7 @@ export default function Contact() {
 
           {/* 携帯番号 */}
           <div className="fade-in">
-            <p className="text-white/50 text-sm">
+            <p className="text-white/75 text-sm">
               お電話が繋がらない場合や、お急ぎの方は直通番号へご連絡ください。：
               <a href="tel:080-4277-9209" className="text-white/70 hover:text-white transition-colors font-medium">
                 080-4277-9209
@@ -160,70 +160,70 @@ export default function Contact() {
                 {/* お名前 */}
                 <div>
                   <label htmlFor="contact-name" className="block text-white/80 text-sm mb-1.5">
-                    お名前 <span className="text-red-400 ml-1">必須</span>
+                    お名前 <span className="text-red-300 ml-1">必須</span>
                   </label>
                   <input
                     type="text"
                     name="お名前" id="contact-name" autoComplete="name"
                     required
                     placeholder="山田 太郎"
-                    className="w-full px-4 py-2.5 rounded-lg bg-white/20 text-white placeholder-white/40 border border-white/20 focus:outline-none focus:border-white/50"
+                    className="w-full px-4 py-2.5 rounded-lg bg-white/20 text-white placeholder-white/70 border border-white/20 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/60"
                   />
                 </div>
 
                 {/* 電話番号 */}
                 <div>
                   <label htmlFor="contact-tel" className="block text-white/80 text-sm mb-1.5">
-                    電話番号 <span className="text-red-400 ml-1">必須</span>
+                    電話番号 <span className="text-red-300 ml-1">必須</span>
                   </label>
                   <input
                     type="tel" inputMode="tel"
                     name="電話番号" id="contact-tel" autoComplete="tel"
                     required
                     placeholder="092-000-0000"
-                    className="w-full px-4 py-2.5 rounded-lg bg-white/20 text-white placeholder-white/40 border border-white/20 focus:outline-none focus:border-white/50"
+                    className="w-full px-4 py-2.5 rounded-lg bg-white/20 text-white placeholder-white/70 border border-white/20 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/60"
                   />
                 </div>
 
                 {/* メールアドレス */}
                 <div>
                   <label htmlFor="contact-email" className="block text-white/80 text-sm mb-1.5">
-                    メールアドレス <span className="text-red-400 ml-1">必須</span>
+                    メールアドレス <span className="text-red-300 ml-1">必須</span>
                   </label>
                   <input
                     type="email"
                     name="email" id="contact-email" autoComplete="email"
                     required
                     placeholder="example@email.com"
-                    className="w-full px-4 py-2.5 rounded-lg bg-white/20 text-white placeholder-white/40 border border-white/20 focus:outline-none focus:border-white/50"
+                    className="w-full px-4 py-2.5 rounded-lg bg-white/20 text-white placeholder-white/70 border border-white/20 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/60"
                   />
                 </div>
 
                 {/* お住まいの地域 */}
                 <div>
                   <label htmlFor="contact-area" className="block text-white/80 text-sm mb-1.5">
-                    お住まいの地域 <span className="text-red-400 ml-1">必須</span>
+                    お住まいの地域 <span className="text-red-300 ml-1">必須</span>
                   </label>
                   <input
                     type="text"
                     name="お住まいの地域" id="contact-area" autoComplete="address-level2"
                     required
                     placeholder="例：福岡市早良区"
-                    className="w-full px-4 py-2.5 rounded-lg bg-white/20 text-white placeholder-white/40 border border-white/20 focus:outline-none focus:border-white/50"
+                    className="w-full px-4 py-2.5 rounded-lg bg-white/20 text-white placeholder-white/70 border border-white/20 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/60"
                   />
                 </div>
 
                 {/* 工事内容 */}
                 <div>
                   <label htmlFor="contact-work" className="block text-white/80 text-sm mb-1.5">
-                    工事内容 <span className="text-red-400 ml-1">必須</span>
+                    工事内容 <span className="text-red-300 ml-1">必須</span>
                   </label>
                   <textarea
                     name="工事内容" id="contact-work"
                     required
                     rows={4}
                     placeholder="ご希望の工事内容をできるだけ詳しくご記入ください"
-                    className="w-full px-4 py-2.5 rounded-lg bg-white/20 text-white placeholder-white/40 border border-white/20 focus:outline-none focus:border-white/50 resize-none"
+                    className="w-full px-4 py-2.5 rounded-lg bg-white/20 text-white placeholder-white/70 border border-white/20 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/60 resize-none"
                   />
                 </div>
 
@@ -232,6 +232,7 @@ export default function Contact() {
                   <button
                     type="button"
                     onClick={() => setOptionalOpen(!optionalOpen)}
+                    aria-expanded={optionalOpen}
                     className="w-full flex items-center justify-between px-4 py-3 text-white/70 text-sm hover:bg-white/10 transition-colors"
                   >
                     <span>任意項目を入力する（ご住所・連絡方法・希望時間帯）</span>
@@ -246,7 +247,7 @@ export default function Contact() {
                           type="text"
                           name="ご住所" id="contact-address" autoComplete="street-address"
                           placeholder="〒000-0000 福岡県..."
-                          className="w-full px-4 py-2.5 rounded-lg bg-white/20 text-white placeholder-white/40 border border-white/20 focus:outline-none focus:border-white/50"
+                          className="w-full px-4 py-2.5 rounded-lg bg-white/20 text-white placeholder-white/70 border border-white/20 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/60"
                         />
                       </div>
 
@@ -270,7 +271,7 @@ export default function Contact() {
                           type="text"
                           name="ご希望時間帯" id="contact-time"
                           placeholder="例：平日 10:00〜17:00"
-                          className="w-full px-4 py-2.5 rounded-lg bg-white/20 text-white placeholder-white/40 border border-white/20 focus:outline-none focus:border-white/50"
+                          className="w-full px-4 py-2.5 rounded-lg bg-white/20 text-white placeholder-white/70 border border-white/20 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/60"
                         />
                       </div>
                     </div>
@@ -279,7 +280,7 @@ export default function Contact() {
 
                 {/* エラーメッセージ */}
                 {submitError && (
-                  <p className="text-red-400 text-sm text-center" role="alert">
+                  <p className="text-red-300 text-sm text-center" role="alert">
                     送信に失敗しました。時間をおいて再度お試しいただくか、お電話でご連絡ください。
                   </p>
                 )}
