@@ -98,7 +98,7 @@ export default function Header() {
         <div className="flex items-center gap-3 lg:hidden">
           <a
             href="tel:092-407-4453"
-            className="flex items-center gap-1.5 text-white"
+            className="relative flex items-center gap-1.5 text-white before:absolute before:-inset-y-3 before:inset-x-0 before:content-['']"
             aria-label="電話をかける"
           >
             <Phone size={16} />

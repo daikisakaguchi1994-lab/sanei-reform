@@ -147,7 +147,7 @@ export default function Contact() {
             <h3 className="text-white font-bold text-lg mb-6 text-center">お問い合わせフォーム</h3>
 
             {submitted ? (
-              <div className="text-center py-8">
+              <div className="text-center py-8" role="status" aria-live="polite">
                 <p className="text-white text-xl font-bold mb-2">✅ 送信が完了しました</p>
                 <p className="text-white/70 text-sm">2営業日以内にご連絡いたします。しばらくお待ちください。</p>
               </div>
@@ -155,15 +155,16 @@ export default function Contact() {
               <form className="space-y-4" onSubmit={handleSubmit}>
                 {/* Formspree用メタ情報 */}
                 <input type="hidden" name="_subject" value="【サンエイリフォーム】お問い合わせが届きました" />
+                <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px", opacity: 0 }} />
 
                 {/* お名前 */}
                 <div>
-                  <label className="block text-white/80 text-sm mb-1.5">
+                  <label htmlFor="contact-name" className="block text-white/80 text-sm mb-1.5">
                     お名前 <span className="text-red-400 ml-1">必須</span>
                   </label>
                   <input
                     type="text"
-                    name="お名前"
+                    name="お名前" id="contact-name" autoComplete="name"
                     required
                     placeholder="山田 太郎"
                     className="w-full px-4 py-2.5 rounded-lg bg-white/20 text-white placeholder-white/40 border border-white/20 focus:outline-none focus:border-white/50"
@@ -172,12 +173,12 @@ export default function Contact() {
 
                 {/* 電話番号 */}
                 <div>
-                  <label className="block text-white/80 text-sm mb-1.5">
+                  <label htmlFor="contact-tel" className="block text-white/80 text-sm mb-1.5">
                     電話番号 <span className="text-red-400 ml-1">必須</span>
                   </label>
                   <input
-                    type="tel"
-                    name="電話番号"
+                    type="tel" inputMode="tel"
+                    name="電話番号" id="contact-tel" autoComplete="tel"
                     required
                     placeholder="092-000-0000"
                     className="w-full px-4 py-2.5 rounded-lg bg-white/20 text-white placeholder-white/40 border border-white/20 focus:outline-none focus:border-white/50"
@@ -186,12 +187,12 @@ export default function Contact() {
 
                 {/* メールアドレス */}
                 <div>
-                  <label className="block text-white/80 text-sm mb-1.5">
+                  <label htmlFor="contact-email" className="block text-white/80 text-sm mb-1.5">
                     メールアドレス <span className="text-red-400 ml-1">必須</span>
                   </label>
                   <input
                     type="email"
-                    name="email"
+                    name="email" id="contact-email" autoComplete="email"
                     required
                     placeholder="example@email.com"
                     className="w-full px-4 py-2.5 rounded-lg bg-white/20 text-white placeholder-white/40 border border-white/20 focus:outline-none focus:border-white/50"
@@ -200,12 +201,12 @@ export default function Contact() {
 
                 {/* お住まいの地域 */}
                 <div>
-                  <label className="block text-white/80 text-sm mb-1.5">
+                  <label htmlFor="contact-area" className="block text-white/80 text-sm mb-1.5">
                     お住まいの地域 <span className="text-red-400 ml-1">必須</span>
                   </label>
                   <input
                     type="text"
-                    name="お住まいの地域"
+                    name="お住まいの地域" id="contact-area" autoComplete="address-level2"
                     required
                     placeholder="例：福岡市早良区"
                     className="w-full px-4 py-2.5 rounded-lg bg-white/20 text-white placeholder-white/40 border border-white/20 focus:outline-none focus:border-white/50"
@@ -214,11 +215,11 @@ export default function Contact() {
 
                 {/* 工事内容 */}
                 <div>
-                  <label className="block text-white/80 text-sm mb-1.5">
+                  <label htmlFor="contact-work" className="block text-white/80 text-sm mb-1.5">
                     工事内容 <span className="text-red-400 ml-1">必須</span>
                   </label>
                   <textarea
-                    name="工事内容"
+                    name="工事内容" id="contact-work"
                     required
                     rows={4}
                     placeholder="ご希望の工事内容をできるだけ詳しくご記入ください"
@@ -240,10 +241,10 @@ export default function Contact() {
                     <div className="px-4 pb-4 space-y-4 border-t border-white/20 pt-4">
                       {/* ご住所 */}
                       <div>
-                        <label className="block text-white/80 text-sm mb-1.5">ご住所</label>
+                        <label htmlFor="contact-address" className="block text-white/80 text-sm mb-1.5">ご住所</label>
                         <input
                           type="text"
-                          name="ご住所"
+                          name="ご住所" id="contact-address" autoComplete="street-address"
                           placeholder="〒000-0000 福岡県..."
                           className="w-full px-4 py-2.5 rounded-lg bg-white/20 text-white placeholder-white/40 border border-white/20 focus:outline-none focus:border-white/50"
                         />
@@ -264,10 +265,10 @@ export default function Contact() {
 
                       {/* ご希望時間帯 */}
                       <div>
-                        <label className="block text-white/80 text-sm mb-1.5">ご希望時間帯</label>
+                        <label htmlFor="contact-time" className="block text-white/80 text-sm mb-1.5">ご希望時間帯</label>
                         <input
                           type="text"
-                          name="ご希望時間帯"
+                          name="ご希望時間帯" id="contact-time"
                           placeholder="例：平日 10:00〜17:00"
                           className="w-full px-4 py-2.5 rounded-lg bg-white/20 text-white placeholder-white/40 border border-white/20 focus:outline-none focus:border-white/50"
                         />
@@ -278,7 +279,7 @@ export default function Contact() {
 
                 {/* エラーメッセージ */}
                 {submitError && (
-                  <p className="text-red-400 text-sm text-center">
+                  <p className="text-red-400 text-sm text-center" role="alert">
                     送信に失敗しました。時間をおいて再度お試しいただくか、お電話でご連絡ください。
                   </p>
                 )}

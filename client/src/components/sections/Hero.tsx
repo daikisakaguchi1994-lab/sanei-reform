@@ -14,27 +14,27 @@ import { HERO_SLIDES } from "@/lib/heroSlides";
 const SLIDE_INTERVAL_MS = 6000;
 const FADE_DURATION_MS = 900;
 
-// LCP対策: 最初のスライド画像をできるだけ早くプリロード（モジュール読込時に一度だけ実行）
-let heroPreloadInjected = false;
-function preloadFirstHeroSlide() {
-  if (heroPreloadInjected || typeof document === "undefined") return;
-  heroPreloadInjected = true;
-
-  const href = HERO_SLIDES[0]?.url;
-  if (!href || document.querySelector(`link[rel="preload"][href="${href}"]`)) return;
-
-  const link = document.createElement("link");
-  link.rel = "preload";
-  link.as = "image";
-  link.href = href;
-  link.setAttribute("fetchpriority", "high");
-  document.head.appendChild(link);
+// 軽量版（webp・640/960/1376px）。作成は client/scripts/make-hero-variants.mjs。
+// 1枚目の先読みは client/index.html の <link rel="preload"> に静的に書いてある（同じ候補にそろえること）。
+const VARIANT_WIDTHS = [640, 960, 1376];
+// スマホは縦長に切り取って表示するため、画面幅より大きく引き伸ばして使う。実際に必要な幅（約900px）で候補を選ばせる。
+const HERO_SIZES = "(max-width: 767px) 900px, 100vw";
+function heroWebpSrcSet(url: string) {
+  const base = url.replace(/\.jpg$/, "");
+  return VARIANT_WIDTHS.map((w) => `${base}-${w}.webp ${w}w`).join(", ");
 }
-preloadFirstHeroSlide();
 
 export default function Hero() {
   const [current, setCurrent] = useState(0);
+  // 2枚目以降は、1枚目の表示後に読み込む（最初の表示で回線を取り合わない）
+  const [loadRest, setLoadRest] = useState(false);
   const prefersReducedMotion = usePrefersReducedMotion();
+
+  useEffect(() => {
+    // 1枚目のonLoadが取りこぼされても、一定時間後には必ず読み込みを始める
+    const timer = setTimeout(() => setLoadRest(true), 3000);
+    return () => clearTimeout(timer);
+  }, []);
 
   // 自動再生（視差軽減設定がONの場合は止める＝手動のドット操作のみ）
   useEffect(() => {
@@ -53,22 +53,34 @@ export default function Hero() {
     >
       {/* スライドショー背景（クロスフェードのみ。ズーム等の演出は付けない） */}
       <div className="absolute inset-0">
-        {HERO_SLIDES.map((slide, i) => (
-          <img
-            key={slide.id}
-            src={slide.url}
-            alt={slide.alt}
-            data-replace={`hero-bg-${slide.id}`}
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{
-              opacity: i === current ? 1 : 0,
-              transition: prefersReducedMotion ? "none" : `opacity ${FADE_DURATION_MS}ms ease-in-out`,
-            }}
-            loading="eager"
-            decoding="async"
-            fetchPriority={i === 0 ? "high" : "low"}
-          />
-        ))}
+        {HERO_SLIDES.map((slide, i) => {
+          const ready = i === 0 || loadRest;
+          return (
+            <picture key={slide.id}>
+              {ready && (
+                <source type="image/webp" srcSet={heroWebpSrcSet(slide.url)} sizes={HERO_SIZES} />
+              )}
+              <img
+                // 読み込み前は空の透明gifにして取得を止める（2枚目以降）
+                src={ready ? slide.url : "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="}
+                alt={ready ? slide.alt : ""}
+                aria-hidden={i === current ? undefined : true}
+                data-replace={`hero-bg-${slide.id}`}
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{
+                  opacity: i === current ? 1 : 0,
+                  transition: prefersReducedMotion ? "none" : `opacity ${FADE_DURATION_MS}ms ease-in-out`,
+                }}
+                width={1376}
+                height={768}
+                loading="eager"
+                decoding="async"
+                fetchPriority={i === 0 ? "high" : "low"}
+                onLoad={i === 0 ? () => setLoadRest(true) : undefined}
+              />
+            </picture>
+          );
+        })}
         {/* <!-- 編集メモ: 各スライドは client/src/lib/heroSlides.ts の url を差し替え --> */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#1F3A5F]/85 via-[#1F3A5F]/60 to-[#1F3A5F]/30" />
       </div>
@@ -153,7 +165,7 @@ export default function Hero() {
             <button
               key={slide.id}
               onClick={() => setCurrent(i)}
-              className="rounded-full transition-all duration-300"
+              className="relative rounded-full transition-all duration-300 before:absolute before:-inset-x-0.5 before:-inset-y-[18px] before:content-['']"
               style={{
                 width: i === current ? "24px" : "8px",
                 height: "8px",
