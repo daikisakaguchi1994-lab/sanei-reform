@@ -48,7 +48,7 @@ export default function Access() {
                 <div className="flex gap-3">
                   <MapPin size={20} className="flex-shrink-0 mt-0.5" style={{ color: "#1F3A5F" }} />
                   <div>
-                    <p className="text-xs font-medium mb-1" style={{ color: "#999" }}>所在地</p>
+                    <p className="text-xs font-medium mb-1" style={{ color: "#666" }}>所在地</p>
                     <p className="text-[15px]" style={{ color: "#333" }}>
                       〒814-0165<br />
                       福岡県福岡市早良区次郎丸4-1-45
@@ -59,12 +59,12 @@ export default function Access() {
                 <div className="flex gap-3">
                   <Phone size={20} className="flex-shrink-0 mt-0.5" style={{ color: "#1F3A5F" }} />
                   <div>
-                    <p className="text-xs font-medium mb-1" style={{ color: "#999" }}>お電話</p>
+                    <p className="text-xs font-medium mb-1" style={{ color: "#666" }}>お電話</p>
                     <p className="text-[15px]">
                       <a href="tel:092-407-4453" className="font-bold hover:underline" style={{ color: "#1F3A5F" }}>
                         092-407-4453
                       </a>
-                      <span className="text-xs ml-2" style={{ color: "#999" }}>（平日 9:00〜17:00）</span>
+                      <span className="text-xs ml-2" style={{ color: "#666" }}>（平日 9:00〜17:00）</span>
                     </p>
                     <p className="text-[14px] mt-1" style={{ color: "#666" }}>
                       繋がらない場合：
@@ -78,7 +78,7 @@ export default function Access() {
                 <div className="flex gap-3">
                   <Mail size={20} className="flex-shrink-0 mt-0.5" style={{ color: "#1F3A5F" }} />
                   <div>
-                    <p className="text-xs font-medium mb-1" style={{ color: "#999" }}>メール</p>
+                    <p className="text-xs font-medium mb-1" style={{ color: "#666" }}>メール</p>
                     <a
                       href="mailto:sanei_kai1105@yahoo.co.jp"
                       className="text-[15px] hover:underline"
@@ -143,7 +143,7 @@ export default function Access() {
                 alt="Google口コミ QRコード"
                 className="w-32 h-32 rounded-lg"
               />
-              <p className="text-xs text-center" style={{ color: "#999" }}>
+              <p className="text-xs text-center" style={{ color: "#666" }}>
                 QRコードからも<br />投稿できます
               </p>
             </div>

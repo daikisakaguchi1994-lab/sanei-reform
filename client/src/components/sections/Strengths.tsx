@@ -4,15 +4,16 @@
  * 次章フック: 「具体的にどんな工事ができるのか、次のセクションでご紹介します →」
  */
 import { useFadeIn } from "@/hooks/useFadeIn";
+import { yearsSinceFounded } from "@/lib/company";
 import { Shield, Wrench, Clock, ArrowRight } from "lucide-react";
 
 const STRENGTHS = [
   {
     icon: Shield,
     number: "01",
-    title: "地域密着・自社施工",
+    title: "地域密着・責任施工",
     description:
-      "福岡市内を中心に、自社の職人が責任を持って施工します。下請けに丸投げしないから、品質管理も万全。お客様との距離が近い、顔の見える対応をお約束します。",
+      "福岡市内を中心に、自社が責任を持って施工を管理します。工事を丸投げせず、お客様との距離が近い、顔の見える対応をお約束します。",
     dataReplace: "strength-01",
   },
   {
@@ -20,7 +21,7 @@ const STRENGTHS = [
     number: "02",
     title: "適正価格・明朗会計",
     description:
-      "中間マージンを省いた自社施工だからこそ実現できる適正価格。お見積もりは無料で、追加費用が発生する場合は必ず事前にご説明します。予算に合わせたご提案も可能です。",
+      "自社が責任を持って施工を管理し、適正価格でご提案します。お見積もりは無料で、追加費用が発生する場合は必ず事前にご説明します。予算に合わせたご提案も可能です。",
     dataReplace: "strength-02",
   },
   {
@@ -52,8 +53,8 @@ export default function Strengths() {
         {/* 実績数字バー */}
         <div className="fade-in grid grid-cols-3 gap-4 mb-12 md:mb-16 max-w-2xl mx-auto">
           {[
-            { num: "15", unit: "年", label: "創業" },
-            { num: "福岡県", unit: "", label: "全域対応" },
+            { num: String(yearsSinceFounded()), unit: "年", label: "創業" },
+            { num: "福岡市", unit: "", label: "周辺も対応" },
             { num: "0", unit: "円", label: "お見積もり" },
           ].map((item) => (
             <div

@@ -60,7 +60,7 @@ export default function Header() {
           </svg>
           <div className="text-white">
             <div className="text-lg md:text-xl font-bold leading-tight tracking-wide">SANEI</div>
-            <div className="text-[10px] md:text-xs leading-tight opacity-80">株式会社サンエイ</div>
+            <div className="text-xs leading-tight opacity-80">株式会社サンエイ</div>
           </div>
         </a>
 
@@ -76,7 +76,7 @@ export default function Header() {
             </a>
           ))}
           <a
-            href="https://line.me/ti/p/h91M99O59l"
+            href="https://line.me/ti/p/nV5rQ8rpE7"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 px-4 py-2 text-sm font-bold rounded-full text-white hover:opacity-80 transition-opacity"
@@ -98,8 +98,8 @@ export default function Header() {
         <div className="flex items-center gap-3 lg:hidden">
           <a
             href="tel:092-407-4453"
-            className="flex items-center gap-1.5 text-white"
-            aria-label="電話をかける"
+            className="relative flex items-center gap-1.5 text-white before:absolute before:-inset-y-3 before:inset-x-0 before:content-['']"
+            aria-label="電話をかける 092-407-4453"
           >
             <Phone size={16} />
             <span className="text-sm font-bold">092-407-4453</span>
@@ -129,7 +129,7 @@ export default function Header() {
               </a>
             ))}
             <a
-              href="https://line.me/ti/p/h91M99O59l"
+              href="https://line.me/ti/p/nV5rQ8rpE7"
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleNavClick}

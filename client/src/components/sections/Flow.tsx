@@ -3,6 +3,7 @@
  * Design: 白背景、ステップ形式の縦タイムライン
  * 次章フック: 「実際の施工事例を写真でご覧ください →」
  */
+import FlowIcon from "@/components/FlowIcons";
 import { useFadeIn } from "@/hooks/useFadeIn";
 import { ArrowRight } from "lucide-react";
 
@@ -34,7 +35,7 @@ const STEPS = [
   {
     number: "05",
     title: "施工",
-    description: "自社の職人が責任を持って施工。工事中の進捗もこまめにご報告し、変更があれば都度ご相談します。",
+    description: "自社が責任を持って施工を管理します。工事中の進捗もこまめにご報告し、変更があれば都度ご相談します。",
     dataReplace: "flow-step-05",
   },
   {
@@ -76,12 +77,7 @@ export default function Flow() {
               {/* <!-- 編集メモ: flow-step-0X のテキスト差し替え可能 --> */}
               {/* 左: 番号＋ライン */}
               <div className="flex flex-col items-center flex-shrink-0">
-                <div
-                  className="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white text-sm font-bold"
-                  style={{ backgroundColor: "#1F3A5F" }}
-                >
-                  {step.number}
-                </div>
+                <FlowIcon index={i} number={step.number} />
                 {i < STEPS.length - 1 && (
                   <div className="w-0.5 flex-1 my-2" style={{ backgroundColor: "#D0D8E0" }} />
                 )}

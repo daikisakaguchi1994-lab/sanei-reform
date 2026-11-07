@@ -18,10 +18,10 @@ export default function Footer() {
               </svg>
               <div>
                 <div className="text-white text-base font-bold">SANEI</div>
-                <div className="text-white/50 text-[10px]">株式会社サンエイ</div>
+                <div className="text-white/75 text-xs">株式会社サンエイ</div>
               </div>
             </div>
-            <p className="text-white/50 text-sm leading-relaxed">
+            <p className="text-white/75 text-sm leading-relaxed">
               〒814-0165<br />
               福岡県福岡市早良区次郎丸4-1-45<br />
               TEL: 092-407-4453<br />
@@ -33,7 +33,7 @@ export default function Footer() {
           {/* ナビリンク */}
           <div className="flex gap-8 md:gap-12">
             <div>
-              <p className="text-white/40 text-xs font-medium mb-3 tracking-wider">MENU</p>
+              <p className="text-white/70 text-xs font-medium mb-3 tracking-wider">MENU</p>
               <nav className="flex flex-col gap-2">
                 {[
                   { label: "強み", href: "#strengths" },
@@ -44,7 +44,7 @@ export default function Footer() {
                   <a
                     key={item.href}
                     href={item.href}
-                    className="text-white/60 text-sm hover:text-white transition-colors"
+                    className="text-white/75 text-sm hover:text-white transition-colors"
                   >
                     {item.label}
                   </a>
@@ -52,7 +52,7 @@ export default function Footer() {
               </nav>
             </div>
             <div>
-              <p className="text-white/40 text-xs font-medium mb-3 tracking-wider">INFO</p>
+              <p className="text-white/70 text-xs font-medium mb-3 tracking-wider">INFO</p>
               <nav className="flex flex-col gap-2">
                 {[
                   { label: "お客様の声", href: "#testimonials" },
@@ -60,11 +60,12 @@ export default function Footer() {
                   { label: "FAQ", href: "#faq" },
                   { label: "アクセス", href: "#access" },
                   { label: "お問い合わせ", href: "#contact" },
+                  { label: "プライバシーポリシー", href: "/privacy/" },
                 ].map((item) => (
                   <a
                     key={item.href}
                     href={item.href}
-                    className="text-white/60 text-sm hover:text-white transition-colors"
+                    className="text-white/75 text-sm hover:text-white transition-colors"
                   >
                     {item.label}
                   </a>
@@ -78,7 +79,7 @@ export default function Footer() {
       {/* コピーライト */}
       <div className="border-t border-white/10">
         <div className="container py-4">
-          <p className="text-white/30 text-xs text-center">
+          <p className="text-white/70 text-xs text-center">
             &copy; {new Date().getFullYear()} 株式会社サンエイ All Rights Reserved.
           </p>
         </div>

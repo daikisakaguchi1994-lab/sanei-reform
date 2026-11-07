@@ -57,7 +57,10 @@ export default function MobileFixedCta() {
       </div>
 
       {/* モバイル用: 底部固定バー */}
-    <div className={`fixed bottom-0 left-0 right-0 z-40 lg:hidden transition-all duration-300 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-full pointer-events-none"}`}>
+    <div
+      className={`fixed bottom-0 left-0 right-0 z-40 lg:hidden transition-all duration-300 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-full pointer-events-none"}`}
+      style={{ backgroundColor: "#FFFFFF", paddingBottom: "env(safe-area-inset-bottom)" }}
+    >
       <div
         className="flex items-stretch shadow-[0_-2px_10px_rgba(0,0,0,0.1)]"
         style={{ backgroundColor: "#FFFFFF" }}
@@ -69,7 +72,7 @@ export default function MobileFixedCta() {
           style={{ color: "#1F3A5F" }}
         >
           <Phone size={20} />
-          <span className="text-[10px] font-medium">電話する</span>
+          <span className="text-xs font-medium">電話する</span>
         </a>
 
         {/* LINE */}
@@ -83,7 +86,7 @@ export default function MobileFixedCta() {
         >
           {/* <!-- 編集メモ: line-url-mobile のhrefをLINEリンクに差し替え --> */}
           <MessageCircle size={20} />
-          <span className="text-[10px] font-medium">LINE</span>
+          <span className="text-xs font-medium">LINE</span>
         </a>
 
         {/* お問い合わせ */}
@@ -93,7 +96,7 @@ export default function MobileFixedCta() {
           style={{ backgroundColor: "#2E7D32" }}
         >
           <Mail size={20} />
-          <span className="text-[10px] font-bold">お問い合わせ</span>
+          <span className="text-xs font-bold">お問い合わせ</span>
         </a>
       </div>
     </div>

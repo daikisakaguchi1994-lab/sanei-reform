@@ -131,7 +131,7 @@ function ImageSlot({
           <div
             className="w-full h-full flex items-center justify-center text-sm"
             data-replace={dataReplace}
-            style={{ backgroundColor: "#E8EDF3", color: "#8899AA" }}
+            style={{ backgroundColor: "#E8EDF3", color: "#666" }}
           >
             写真準備中
           </div>
@@ -175,6 +175,7 @@ export default function Cases() {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
+                aria-pressed={isActive}
                 className="text-sm font-medium px-4 py-1.5 rounded-full transition-colors duration-200"
                 style={
                   isActive
@@ -223,7 +224,7 @@ export default function Cases() {
                     {caseItem.title}
                   </h3>
                   <span
-                    className="text-[11px] font-medium px-2 py-0.5 rounded-full shrink-0"
+                    className="text-xs font-medium px-2 py-0.5 rounded-full shrink-0"
                     style={{ backgroundColor: "#EEF2F8", color: "#1F3A5F" }}
                   >
                     {caseItem.category}

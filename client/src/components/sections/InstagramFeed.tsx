@@ -24,8 +24,8 @@ const INSTAGRAM_URL = "https://www.instagram.com/sanei_offical/";
 
 // 拡大表示用サムネイル（既存の施工写真）
 const THUMBS = [
-  { src: "/images/bath-before.jpg", label: "浴室 Before" },
-  { src: "/images/bath-after.jpg", label: "浴室 After" },
+  { src: "/images/cases/bath-before.webp", label: "浴室 Before" },
+  { src: "/images/cases/bath-after.webp", label: "浴室 After" },
 ];
 
 /** Behold ウィジェットのスクリプトを一度だけ読み込む（feed-id 設定時のみ） */
@@ -89,8 +89,8 @@ export default function InstagramFeed() {
           </p>
           <div className="mx-auto max-w-3xl">
             <BeforeAfterSlider
-              beforeSrc="/images/room-before.jpg"
-              afterSrc="/images/room-after.jpg"
+              beforeSrc="/images/cases/room-before-2.webp"
+              afterSrc="/images/cases/room-after-2.webp"
               beforeAlt="リフォーム前の和室"
               afterAlt="フルリフォーム後の明るい洋室"
               className="shadow-md"
@@ -114,7 +114,7 @@ export default function InstagramFeed() {
                 className="h-full w-full object-cover"
                 loading="lazy"
               />
-              <span className="absolute inset-x-0 bottom-0 bg-black/45 py-0.5 text-center text-[10px] font-medium text-white">
+              <span className="absolute inset-x-0 bottom-0 bg-black/45 py-0.5 text-center text-xs font-medium text-white">
                 {t.label}
               </span>
             </button>

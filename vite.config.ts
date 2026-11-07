@@ -1,159 +1,93 @@
-import { jsxLocPlugin } from "@builder.io/vite-plugin-jsx-loc";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import fs from "node:fs";
 import path from "node:path";
-import { defineConfig, type Plugin, type ViteDevServer } from "vite";
-import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
+import { defineConfig, type Plugin } from "vite";
+import { yearsSinceFounded } from "./client/src/lib/company";
 
-// =============================================================================
-// Manus Debug Collector - Vite Plugin
-// Writes browser logs directly to files, trimmed when exceeding size limit
-// =============================================================================
+const GOOGLE_FONTS_CSS = "https://fonts.googleapis.com/css2";
+const SOURCE_DIRS = ["client/src/components/sections", "client/src/pages"];
 
-const PROJECT_ROOT = import.meta.dirname;
-const LOG_DIR = path.join(PROJECT_ROOT, ".manus-logs");
-const MAX_LOG_SIZE_BYTES = 1 * 1024 * 1024; // 1MB per log file
-const TRIM_TARGET_BYTES = Math.floor(MAX_LOG_SIZE_BYTES * 0.6); // Trim to 60% to avoid constant re-trimming
-
-type LogSource = "browserConsole" | "networkRequests" | "sessionReplay";
-
-function ensureLogDir() {
-  if (!fs.existsSync(LOG_DIR)) {
-    fs.mkdirSync(LOG_DIR, { recursive: true });
-  }
+function unescapeJs(text: string) {
+  return text
+    .replace(/\\u\{([0-9a-f]+)\}/gi, (_, hex) => String.fromCodePoint(parseInt(hex, 16)))
+    .replace(/\\u([0-9a-f]{4})/gi, (_, hex) => String.fromCharCode(parseInt(hex, 16)));
 }
 
-function trimLogFile(logPath: string, maxSize: number) {
-  try {
-    if (!fs.existsSync(logPath) || fs.statSync(logPath).size <= maxSize) {
-      return;
-    }
-
-    const lines = fs.readFileSync(logPath, "utf-8").split("\n");
-    const keptLines: string[] = [];
-    let keptBytes = 0;
-
-    // Keep newest lines (from end) that fit within 60% of maxSize
-    const targetSize = TRIM_TARGET_BYTES;
-    for (let i = lines.length - 1; i >= 0; i--) {
-      const lineBytes = Buffer.byteLength(`${lines[i]}\n`, "utf-8");
-      if (keptBytes + lineBytes > targetSize) break;
-      keptLines.unshift(lines[i]);
-      keptBytes += lineBytes;
-    }
-
-    fs.writeFileSync(logPath, keptLines.join("\n"), "utf-8");
-  } catch {
-    /* ignore trim errors */
+/** 文字の集合。半角英数記号は常に含める。絵文字は Noto に無いので外す。 */
+function collectChars(text: string) {
+  const chars = new Set<string>();
+  for (let code = 32; code < 127; code++) chars.add(String.fromCharCode(code));
+  for (const char of text) {
+    if (char.charCodeAt(0) < 128) continue;
+    if (/\p{Extended_Pictographic}|\p{Cs}|\p{Co}|️/u.test(char)) continue;
+    if (/[\p{L}\p{N}\p{P}\p{S}　]/u.test(char)) chars.add(char);
   }
+  return [...chars].join("");
 }
 
-function writeToLogFile(source: LogSource, entries: unknown[]) {
-  if (entries.length === 0) return;
-
-  ensureLogDir();
-  const logPath = path.join(LOG_DIR, `${source}.log`);
-
-  // Format entries with timestamps
-  const lines = entries.map((entry) => {
-    const ts = new Date().toISOString();
-    return `[${ts}] ${JSON.stringify(entry)}`;
-  });
-
-  // Append to log file
-  fs.appendFileSync(logPath, `${lines.join("\n")}\n`, "utf-8");
-
-  // Trim if exceeds max size
-  trimLogFile(logPath, MAX_LOG_SIZE_BYTES);
+/** 明朝体を使う見出し（h1・h2）の文字。式が入っていたら字が欠けるのでビルドを止める。 */
+function headingText(root: string) {
+  let text = "";
+  for (const dir of SOURCE_DIRS) {
+    for (const file of fs.readdirSync(path.join(root, dir))) {
+      if (!file.endsWith(".tsx")) continue;
+      const source = fs.readFileSync(path.join(root, dir, file), "utf8");
+      for (const match of source.matchAll(/<h[12]\b[^>]*>([\s\S]*?)<\/h[12]>/g)) {
+        const body = match[1].replace(/<[^>]+>/g, "").replace(/\{\s*\/\*[\s\S]*?\*\/\s*\}/g, "");
+        if (body.includes("{")) {
+          throw new Error(`font-subset: ${file} の見出しに式があり、使う文字を数えられません: ${body.trim().slice(0, 60)}`);
+        }
+        text += body;
+      }
+    }
+  }
+  return text;
 }
 
 /**
- * Vite plugin to collect browser debug logs
- * - POST /__manus__/logs: Browser sends logs, written directly to files
- * - Files: browserConsole.log, networkRequests.log, sessionReplay.log
- * - Auto-trimmed when exceeding 1MB (keeps newest entries)
+ * 本番ビルドで、Google Fonts の読み込みを「サイトで使っている文字だけ」に絞る。
+ * 文字はビルドのたびに数えるので、文言を変えても字は欠けない。開発サーバーは全文字のまま。
  */
-function vitePluginManusDebugCollector(): Plugin {
+function fontSubset(root: string): Plugin {
   return {
-    name: "manus-debug-collector",
-
-    transformIndexHtml(html) {
-      if (process.env.NODE_ENV === "production") {
-        return html;
-      }
-      return {
-        html,
-        tags: [
-          {
-            tag: "script",
-            attrs: {
-              src: "/__manus__/debug-collector.js",
-              defer: true,
-            },
-            injectTo: "head",
-          },
-        ],
-      };
-    },
-
-    configureServer(server: ViteDevServer) {
-      // POST /__manus__/logs: Browser sends logs (written directly to files)
-      server.middlewares.use("/__manus__/logs", (req, res, next) => {
-        if (req.method !== "POST") {
-          return next();
+    name: "font-subset",
+    apply: "build",
+    transformIndexHtml: {
+      order: "post",
+      handler(html, ctx) {
+        if (!ctx.bundle) return html;
+        let code = html;
+        for (const item of Object.values(ctx.bundle)) {
+          if (item.type === "chunk") code += item.code;
         }
-
-        const handlePayload = (payload: any) => {
-          // Write logs directly to files
-          if (payload.consoleLogs?.length > 0) {
-            writeToLogFile("browserConsole", payload.consoleLogs);
-          }
-          if (payload.networkRequests?.length > 0) {
-            writeToLogFile("networkRequests", payload.networkRequests);
-          }
-          if (payload.sessionEvents?.length > 0) {
-            writeToLogFile("sessionReplay", payload.sessionEvents);
-          }
-
-          res.writeHead(200, { "Content-Type": "application/json" });
-          res.end(JSON.stringify({ success: true }));
-        };
-
-        const reqBody = (req as { body?: unknown }).body;
-        if (reqBody && typeof reqBody === "object") {
-          try {
-            handlePayload(reqBody);
-          } catch (e) {
-            res.writeHead(400, { "Content-Type": "application/json" });
-            res.end(JSON.stringify({ success: false, error: String(e) }));
-          }
-          return;
-        }
-
-        let body = "";
-        req.on("data", (chunk) => {
-          body += chunk.toString();
-        });
-
-        req.on("end", () => {
-          try {
-            const payload = JSON.parse(body);
-            handlePayload(payload);
-          } catch (e) {
-            res.writeHead(400, { "Content-Type": "application/json" });
-            res.end(JSON.stringify({ success: false, error: String(e) }));
-          }
-        });
-      });
+        const link = (family: string, chars: string) =>
+          `<link href="${GOOGLE_FONTS_CSS}?family=${family}&amp;display=swap&amp;text=${encodeURIComponent(chars)}" rel="stylesheet" />`;
+        const links = [
+          link("Noto+Sans+JP:wght@400;500;700", collectChars(unescapeJs(code))),
+          link("Noto+Serif+JP:wght@700", collectChars(headingText(root))),
+        ].join("\n    ");
+        const pattern = /<link href="https:\/\/fonts\.googleapis\.com\/css2[^>]*>/;
+        if (!pattern.test(html)) throw new Error("font-subset: index.html に Google Fonts の link がありません");
+        return html.replace(pattern, () => links);
+      },
     },
   };
 }
 
-const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector()];
+/** index.html の説明文の「創業○年」を、ビルドの時点の年数にする。 */
+function companyYears(): Plugin {
+  return {
+    name: "company-years",
+    transformIndexHtml: {
+      order: "pre",
+      handler: (html) => html.replace(/%COMPANY_YEARS%/g, String(yearsSinceFounded())),
+    },
+  };
+}
 
 export default defineConfig({
-  plugins,
+  plugins: [react(), tailwindcss(), companyYears(), fontSubset(import.meta.dirname)],
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),
@@ -162,7 +96,7 @@ export default defineConfig({
     },
   },
   envDir: path.resolve(import.meta.dirname),
-  // VITE_ に加え、Behold ウィジェット用の PUBLIC_ プレフィックスもクライアントへ公開
+  // VITE_ に加え、Behold ウィジェット用の PUBLIC_ プレフィックスもクライアントへ渡す
   envPrefix: ["VITE_", "PUBLIC_"],
   root: path.resolve(import.meta.dirname, "client"),
   build: {
@@ -173,15 +107,7 @@ export default defineConfig({
     port: 3000,
     strictPort: false, // Will find next available port if 3000 is busy
     host: true,
-    allowedHosts: [
-      ".manuspre.computer",
-      ".manus.computer",
-      ".manus-asia.computer",
-      ".manuscomputer.ai",
-      ".manusvm.computer",
-      "localhost",
-      "127.0.0.1",
-    ],
+    allowedHosts: ["localhost", "127.0.0.1"],
     fs: {
       strict: true,
       deny: ["**/.*"],
