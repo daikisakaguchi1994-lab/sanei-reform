@@ -68,10 +68,9 @@ export const HERO_SLIDES_SP: HeroSlide[] = [
 
 /**
  * 「画像はイメージです」の表示スイッチ。
- * 確認用の画面では本番の姿で判断できるよう隠している（Daiki氏の方針 2026-11-05）。
- * AI生成の写真を出すので、公開前に必ず true に戻すこと。
+ * AI生成の写真を出すので、公開時は必ず true にする（社長の了承 2026-11-07）。
  */
-export const SHOW_PHOTO_NOTE = false;
+export const SHOW_PHOTO_NOTE = true;
 
 export function heroSrcSet(slide: HeroSlide) {
   return slide.widths.map((w) => `${slide.base}-${w}.webp ${w}w`).join(", ");

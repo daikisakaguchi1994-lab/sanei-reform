@@ -124,7 +124,7 @@ export default function Hero() {
           <div className="hero-shade absolute inset-0 hidden md:block" />
 
           {SHOW_PHOTO_NOTE && (
-            <span className="absolute right-2 top-2 rounded bg-black/45 px-1.5 py-1 text-xs leading-none text-white md:bottom-2 md:top-auto">
+            <span className="absolute right-2 top-4 rounded bg-black/45 px-1.5 py-1 text-xs leading-none text-white md:bottom-2 md:top-auto">
               画像はイメージです
             </span>
           )}

@@ -201,9 +201,11 @@
     text-decoration: none;
     border: none;
   }
-  .cta-button:hover {
-    background-color: #256b29;
-    transform: translateY(-1px);
+  @media (hover: hover) {
+    .cta-button:hover {
+      background-color: #256b29;
+      transform: translateY(-1px);
+    }
   }
 
   /* Fade-in animation（html に fade-ready が付いたときだけ透明から始める。main.tsx 参照） */
