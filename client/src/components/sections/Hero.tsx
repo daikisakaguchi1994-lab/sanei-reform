@@ -215,9 +215,9 @@ export default function Hero() {
           </div>
 
           {/* 実績 */}
-          <div className="order-5 mt-4 flex max-w-[520px] border-t border-white/20 pt-3 md:mt-6">
+          <div className="order-5 mt-4 flex max-w-[520px] border-t border-white/20 pt-3 text-center md:mt-6 md:text-left">
             {FACTS.map((fact, i) => (
-              <div key={fact.label} className={i === 0 ? "pr-3" : "border-l border-white/20 px-3"}>
+              <div key={fact.label} className={`flex-auto px-1 md:flex-none ${i === 0 ? "md:pl-0 md:pr-3" : "border-l border-white/20 md:px-3"}`}>
                 <span className="block text-[15px] font-bold leading-[1.3] text-white md:text-[17px]">
                   {fact.num}
                   <span className="text-[13px]">{fact.unit}</span>
