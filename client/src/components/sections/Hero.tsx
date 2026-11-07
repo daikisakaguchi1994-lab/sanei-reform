@@ -70,12 +70,17 @@ export default function Hero() {
     return () => clearTimeout(timer);
   }, [autoplay, active, slides.length]);
 
+  const goTo = (index: number) => {
+    setLoadRest(true);
+    setCurrent(index);
+  };
+
   const handleTouchEnd = (e: React.TouchEvent) => {
     if (touchStartX.current === null) return;
     const dx = e.changedTouches[0].clientX - touchStartX.current;
     touchStartX.current = null;
     if (Math.abs(dx) < SWIPE_MIN_PX) return;
-    setCurrent((active + (dx < 0 ? 1 : -1) + slides.length) % slides.length);
+    goTo((active + (dx < 0 ? 1 : -1) + slides.length) % slides.length);
   };
 
   return (
@@ -136,7 +141,7 @@ export default function Hero() {
                 <button
                   key={slide.base}
                   type="button"
-                  onClick={() => setCurrent(i)}
+                  onClick={() => goTo(i)}
                   className="relative rounded-full shadow-[0_0_4px_rgba(0,0,0,.45)] transition-all duration-300 before:absolute before:-inset-x-2 before:-inset-y-[18px] before:content-['']"
                   style={{
                     width: i === active ? "24px" : "8px",
