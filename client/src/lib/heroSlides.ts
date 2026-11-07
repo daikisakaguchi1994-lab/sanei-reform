@@ -17,7 +17,7 @@ export const HERO_SLIDES: HeroSlide[] = [
   {
     id: "family",
     url: "/images/hero/hero-family.jpg",
-    alt: "子育て世帯向けにフルリフォームした福岡市の明るいリビング",
+    alt: "リフォームした明るいダイニングキッチンで食卓を囲む家族",
   },
   {
     id: "hobby",

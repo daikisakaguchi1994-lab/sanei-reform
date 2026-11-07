@@ -66,7 +66,7 @@ export default function Hero() {
                 alt={ready ? slide.alt : ""}
                 aria-hidden={i === current ? undefined : true}
                 data-replace={`hero-bg-${slide.id}`}
-                className="absolute inset-0 w-full h-full object-cover"
+                className={`absolute inset-0 w-full h-full object-cover hero-pos-${slide.id}`}
                 style={{
                   opacity: i === current ? 1 : 0,
                   transition: prefersReducedMotion ? "none" : `opacity ${FADE_DURATION_MS}ms ease-in-out`,

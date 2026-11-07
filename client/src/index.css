@@ -239,6 +239,13 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ヒーロー1枚目: 縦長の画面では中央が切り取られるため、人物（右側）が残る横位置にする */
+@media (max-aspect-ratio: 1/1) {
+  .hero-pos-family {
+    object-position: 72% 50%;
+  }
+}
+
 /* 「視差・動きを減らす」設定の端末では、出現・バウンド・スムーズスクロールを止める */
 @media (prefers-reduced-motion: reduce) {
   html {
