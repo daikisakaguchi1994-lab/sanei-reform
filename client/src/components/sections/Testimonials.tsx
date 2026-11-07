@@ -88,7 +88,7 @@ const GOOGLE_REVIEWS: TestimonialItem[] = [
   {
     id: "google-02",
     type: "飲食店内装工事",
-    summary: "飲食店の内装工事、満足のいく仕上がり",
+    summary: "飲食店の内装工事",
     body: "うちの飲食店の内装工事をお願いしました。",
     name: "",
     dataReplace: "google-02",

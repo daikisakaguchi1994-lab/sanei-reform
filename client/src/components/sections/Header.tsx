@@ -76,7 +76,7 @@ export default function Header() {
             </a>
           ))}
           <a
-            href="https://line.me/ti/p/h91M99O59l"
+            href="https://line.me/ti/p/nV5rQ8rpE7"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 px-4 py-2 text-sm font-bold rounded-full text-white hover:opacity-80 transition-opacity"
@@ -129,7 +129,7 @@ export default function Header() {
               </a>
             ))}
             <a
-              href="https://line.me/ti/p/h91M99O59l"
+              href="https://line.me/ti/p/nV5rQ8rpE7"
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleNavClick}

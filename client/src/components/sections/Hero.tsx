@@ -9,6 +9,7 @@
  */
 import { ArrowDown, ArrowRight, Pause, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { yearsSinceFounded } from "@/lib/company";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import {
   HERO_SLIDES_PC,
@@ -31,9 +32,9 @@ const ARROW_MOTION =
   "transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:scale-105";
 
 const FACTS = [
-  { num: "15", unit: "年", label: "創業" },
+  { num: String(yearsSinceFounded()), unit: "年", label: "創業" },
   { num: "福岡県", unit: "", label: "地域密着" },
-  { num: "自社", unit: "施工", label: "中間マージンなし" },
+  { num: "自社", unit: "管理", label: "責任を持って施工" },
 ];
 
 export default function Hero() {
@@ -178,9 +179,9 @@ export default function Hero() {
           >
             キッチン・浴室・トイレ・洗面の水回りリフォームから、クロス張替え・フローリング・間取り変更まで。
             <br className="hidden md:block" />
-            福岡市・春日市・大野城市・太宰府市対応。
+            福岡市・春日市・大野城市・太宰府市・糸島市対応、他のエリアもご相談ください。
             <br className="hidden md:block" />
-            自社施工だから中間マージンなし、無料見積り受付中。
+            自社が責任を持って施工を管理します。無料見積り受付中。
           </p>
 
           <div className="order-3 mt-4 flex flex-col gap-2.5 md:order-4 md:mt-6 md:flex-row md:gap-3">

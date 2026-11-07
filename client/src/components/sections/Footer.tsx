@@ -60,6 +60,7 @@ export default function Footer() {
                   { label: "FAQ", href: "#faq" },
                   { label: "アクセス", href: "#access" },
                   { label: "お問い合わせ", href: "#contact" },
+                  { label: "プライバシーポリシー", href: "/privacy/" },
                 ].map((item) => (
                   <a
                     key={item.href}

@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import fs from "node:fs";
 import path from "node:path";
 import { defineConfig, type Plugin } from "vite";
+import { yearsSinceFounded } from "./client/src/lib/company";
 
 const GOOGLE_FONTS_CSS = "https://fonts.googleapis.com/css2";
 const SOURCE_DIRS = ["client/src/components/sections", "client/src/pages"];
@@ -74,8 +75,19 @@ function fontSubset(root: string): Plugin {
   };
 }
 
+/** index.html の説明文の「創業○年」を、ビルドの時点の年数にする。 */
+function companyYears(): Plugin {
+  return {
+    name: "company-years",
+    transformIndexHtml: {
+      order: "pre",
+      handler: (html) => html.replace(/%COMPANY_YEARS%/g, String(yearsSinceFounded())),
+    },
+  };
+}
+
 export default defineConfig({
-  plugins: [react(), tailwindcss(), fontSubset(import.meta.dirname)],
+  plugins: [react(), tailwindcss(), companyYears(), fontSubset(import.meta.dirname)],
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),

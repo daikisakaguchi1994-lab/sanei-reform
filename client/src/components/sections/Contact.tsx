@@ -94,7 +94,7 @@ export default function Contact() {
               <div className="text-center">
                 <p className="text-white font-bold text-base">💬 LINEで相談</p>
                 <p className="text-white/70 text-sm mt-1">気軽にメッセージを送る</p>
-                <p className="text-white/75 text-xs mt-1">24時間受付・2営業日以内に返信</p>
+                <p className="text-white/75 text-xs mt-1">24時間受付・当日〜翌営業日に返信</p>
               </div>
               <img
                 src="/line-qr.png"
@@ -120,7 +120,7 @@ export default function Contact() {
               <div className="text-center">
                 <p className="text-white font-bold text-base">✉️ フォームで相談</p>
                 <p className="text-white/70 text-sm mt-1">24時間受付中</p>
-                <p className="text-white/75 text-xs mt-1">2営業日以内に返信</p>
+                <p className="text-white/75 text-xs mt-1">当日〜翌営業日に返信</p>
               </div>
               <a
                 href="#contact-form"
@@ -149,7 +149,7 @@ export default function Contact() {
             {submitted ? (
               <div className="text-center py-8" role="status" aria-live="polite">
                 <p className="text-white text-xl font-bold mb-2">✅ 送信が完了しました</p>
-                <p className="text-white/70 text-sm">2営業日以内にご連絡いたします。しばらくお待ちください。</p>
+                <p className="text-white/70 text-sm">当日〜翌営業日にご連絡いたします。しばらくお待ちください。</p>
               </div>
             ) : (
               <form className="space-y-4" onSubmit={handleSubmit}>
@@ -284,6 +284,15 @@ export default function Contact() {
                     送信に失敗しました。時間をおいて再度お試しいただくか、お電話でご連絡ください。
                   </p>
                 )}
+
+                {/* 個人情報の利用目的 */}
+                <p className="text-white/75 text-xs leading-relaxed">
+                  入力いただいた情報は、ご連絡・お見積もり・工事のご案内のために利用します。送信いただくと、
+                  <a href="/privacy/" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">
+                    プライバシーポリシー
+                  </a>
+                  に同意したものとします。
+                </p>
 
                 {/* 送信ボタン */}
                 <button
