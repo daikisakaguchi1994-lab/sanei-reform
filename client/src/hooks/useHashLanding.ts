@@ -7,18 +7,26 @@ import { useEffect } from "react";
  */
 export function useHashLanding() {
   useEffect(() => {
-    const id = decodeURIComponent(window.location.hash.slice(1));
+    const initialHash = window.location.hash;
+    let id = "";
+    try {
+      id = decodeURIComponent(initialHash.slice(1));
+    } catch {
+      return; // 「/#%」のような壊れた # は何もしない（ページは普通に表示する）
+    }
     if (!id) return;
     let userMoved = false;
     const markMoved = () => (userMoved = true);
     const land = () => {
-      if (userMoved) return;
+      // 利用者が動かした、または別のページ内リンクを押した後は、最初の場所へ引き戻さない
+      if (userMoved || window.location.hash !== initialHash) return;
       document.getElementById(id)?.scrollIntoView({ behavior: "instant" as ScrollBehavior, block: "start" });
     };
     const frame = requestAnimationFrame(land);
     window.addEventListener("wheel", markMoved, { passive: true, once: true });
     window.addEventListener("touchstart", markMoved, { passive: true, once: true });
     window.addEventListener("keydown", markMoved, { once: true });
+    window.addEventListener("click", markMoved, { once: true });
     const onLoad = () => land();
     if (document.readyState === "complete") document.fonts?.ready.then(land);
     else window.addEventListener("load", onLoad, { once: true });
@@ -28,6 +36,7 @@ export function useHashLanding() {
       window.removeEventListener("wheel", markMoved);
       window.removeEventListener("touchstart", markMoved);
       window.removeEventListener("keydown", markMoved);
+      window.removeEventListener("click", markMoved);
     };
   }, []);
 }
