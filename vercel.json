@@ -43,5 +43,12 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/business",
+      "destination": "/business/",
+      "permanent": true
+    }
   ]
 }

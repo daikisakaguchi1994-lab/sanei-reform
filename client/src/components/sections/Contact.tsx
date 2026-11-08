@@ -10,8 +10,15 @@ import { Phone, MessageCircle, Mail, ChevronDown, ChevronUp } from "lucide-react
 // ▼ FormspreeのフォームIDをここに入れる（例: xpzgkwjd）
 const FORMSPREE_ID = "mpqypvlk";
 
-export default function Contact() {
+/** ご依頼元。法人（2つ目以降）を選ぶと、会社名の欄が出て、項目名が法人向けになる。 */
+const CLIENT_TYPES = ["個人のお客様", "不動産会社・管理会社", "店舗・その他の法人"] as const;
+type ClientType = (typeof CLIENT_TYPES)[number];
+
+/** variant: "home"=トップページ、"business"=法人の方へ（/business/）。ご依頼元の初期値と、上の案内文が変わる。 */
+export default function Contact({ variant = "home" }: { variant?: "home" | "business" }) {
   const ref = useFadeIn();
+  const [clientType, setClientType] = useState<ClientType>(variant === "business" ? CLIENT_TYPES[1] : CLIENT_TYPES[0]);
+  const isCorp = clientType !== CLIENT_TYPES[0];
   const [optionalOpen, setOptionalOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -54,15 +61,25 @@ export default function Contact() {
             <h2 className="text-[22px] md:text-[28px] font-bold text-white mb-4">
               お問い合わせ
             </h2>
-            <p className="text-white/80 text-[15px] md:text-base leading-relaxed" data-replace="contact-message">
-              ここまでお読みいただき、ありがとうございます。
-              <br />
-              「まだ具体的に決まっていない」「とりあえず話だけ聞きたい」
-              <br className="hidden md:block" />
-              そんな段階でも大丈夫です。
-              <br />
-              お見積もりは無料ですので、まずはお気軽にご連絡ください。
-            </p>
+            {variant === "business" ? (
+              <p className="text-white/80 text-[15px] md:text-base leading-relaxed" data-replace="contact-message">
+                物件の場所とご依頼の内容をお知らせください。
+                <br />
+                現地を確認して、お見積もりをお出しします（無料）。
+                <br />
+                1件だけのご相談、お急ぎのご相談も歓迎です。
+              </p>
+            ) : (
+              <p className="text-white/80 text-[15px] md:text-base leading-relaxed" data-replace="contact-message">
+                ここまでお読みいただき、ありがとうございます。
+                <br />
+                「まだ具体的に決まっていない」「とりあえず話だけ聞きたい」
+                <br className="hidden md:block" />
+                そんな段階でも大丈夫です。
+                <br />
+                お見積もりは無料ですので、まずはお気軽にご連絡ください。
+              </p>
+            )}
           </div>
 
           {/* 連絡手段 */}
@@ -154,13 +171,58 @@ export default function Contact() {
             ) : (
               <form className="space-y-4" onSubmit={handleSubmit}>
                 {/* Formspree用メタ情報 */}
-                <input type="hidden" name="_subject" value="【サンエイリフォーム】お問い合わせが届きました" />
+                <input
+                  type="hidden"
+                  name="_subject"
+                  value={isCorp ? "【サンエイリフォーム】法人のお問い合わせが届きました" : "【サンエイリフォーム】お問い合わせが届きました"}
+                />
                 <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px", opacity: 0 }} />
+
+                {/* ご依頼元 */}
+                <fieldset>
+                  <legend className="block text-white/80 text-sm mb-1.5">ご依頼元</legend>
+                  <div className="flex flex-wrap gap-2">
+                    {CLIENT_TYPES.map((t) => (
+                      <label
+                        key={t}
+                        className={`cursor-pointer rounded-full border px-4 py-2 text-sm transition-colors focus-within:ring-2 focus-within:ring-white/70 ${
+                          clientType === t ? "border-white bg-white font-bold text-[#1F3A5F]" : "border-white/35 text-white/85 hover:bg-white/10"
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="ご依頼元"
+                          value={t}
+                          checked={clientType === t}
+                          onChange={() => setClientType(t)}
+                          className="sr-only"
+                        />
+                        {t}
+                      </label>
+                    ))}
+                  </div>
+                </fieldset>
+
+                {/* 会社名（法人のみ） */}
+                {isCorp && (
+                  <div>
+                    <label htmlFor="contact-company" className="block text-white/80 text-sm mb-1.5">
+                      会社名・店舗名 <span className="text-red-300 ml-1">必須</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="会社名" id="contact-company" autoComplete="organization"
+                      required
+                      placeholder="例：株式会社○○ 管理部"
+                      className="w-full px-4 py-2.5 rounded-lg bg-white/20 text-white placeholder-white/70 border border-white/20 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/60"
+                    />
+                  </div>
+                )}
 
                 {/* お名前 */}
                 <div>
                   <label htmlFor="contact-name" className="block text-white/80 text-sm mb-1.5">
-                    お名前 <span className="text-red-300 ml-1">必須</span>
+                    {isCorp ? "ご担当者名" : "お名前"} <span className="text-red-300 ml-1">必須</span>
                   </label>
                   <input
                     type="text"
@@ -202,13 +264,13 @@ export default function Contact() {
                 {/* お住まいの地域 */}
                 <div>
                   <label htmlFor="contact-area" className="block text-white/80 text-sm mb-1.5">
-                    お住まいの地域 <span className="text-red-300 ml-1">必須</span>
+                    {isCorp ? "物件の所在地" : "お住まいの地域"} <span className="text-red-300 ml-1">必須</span>
                   </label>
                   <input
                     type="text"
-                    name="お住まいの地域" id="contact-area" autoComplete="address-level2"
+                    name={isCorp ? "物件の所在地" : "お住まいの地域"} id="contact-area" autoComplete={isCorp ? "off" : "address-level2"}
                     required
-                    placeholder="例：福岡市早良区"
+                    placeholder={isCorp ? "例：福岡市博多区（複数の場合はまとめてご記入ください）" : "例：福岡市早良区"}
                     className="w-full px-4 py-2.5 rounded-lg bg-white/20 text-white placeholder-white/70 border border-white/20 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/60"
                   />
                 </div>
@@ -222,7 +284,11 @@ export default function Contact() {
                     name="工事内容" id="contact-work"
                     required
                     rows={4}
-                    placeholder="ご希望の工事内容をできるだけ詳しくご記入ください"
+                    placeholder={
+                      isCorp
+                        ? "例：2LDKの退去後、クロスと床の張り替え。ご希望の時期もあればご記入ください"
+                        : "ご希望の工事内容をできるだけ詳しくご記入ください"
+                    }
                     className="w-full px-4 py-2.5 rounded-lg bg-white/20 text-white placeholder-white/70 border border-white/20 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/60 resize-none"
                   />
                 </div>

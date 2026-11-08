@@ -246,10 +246,18 @@ html {
    ページ内リンクを押したときは解除する（.cv-off、main.tsx）。
    スマホ・タブレットの幅だけに使う。PC（解像度の粗い画面）では文字の縁がわずかに薄く描かれるため（2026-11-07 実測）。 */
 @media (max-width: 1023px) {
-  html:not(.cv-off) main > section:not(#hero) {
+  html:not(.cv-off) main > section:not(#hero):not(#biz-hero) {
     content-visibility: auto;
     contain-intrinsic-size: auto 900px;
   }
+}
+
+/* 法人の方へ（/business/）の見出しは、最後の行に1〜2文字だけ残らないよう、行の長さをそろえて文節で改行する */
+.biz-page main h1,
+.biz-page main h2,
+.biz-page main h3 {
+  text-wrap: balance;
+  word-break: auto-phrase;
 }
 
 /* ヒーローの見出し。スマホは14文字が1行に収まる大きさ（左右の余白16pxを引いた幅から計算） */
