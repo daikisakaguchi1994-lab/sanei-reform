@@ -18,8 +18,10 @@ import Access from "@/components/sections/Access";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
 import MobileFixedCta from "@/components/sections/MobileFixedCta";
+import { useHashLanding } from "@/hooks/useHashLanding";
 
 export default function Home() {
+  useHashLanding();
   return (
     <div className="min-h-screen flex flex-col">
       {/* ヘッダー（sticky） */}

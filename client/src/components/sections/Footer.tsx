@@ -2,6 +2,7 @@
  * フッターセクション
  * Design: ダークネイビー背景、会社情報＋ナビリンク＋コピーライト
  */
+import { BUSINESS_PATH, homeHref } from "@/lib/nav";
 
 export default function Footer() {
   return (
@@ -43,7 +44,7 @@ export default function Footer() {
                 ].map((item) => (
                   <a
                     key={item.href}
-                    href={item.href}
+                    href={homeHref(item.href)}
                     className="text-white/75 text-sm hover:text-white transition-colors"
                   >
                     {item.label}
@@ -60,11 +61,12 @@ export default function Footer() {
                   { label: "FAQ", href: "#faq" },
                   { label: "アクセス", href: "#access" },
                   { label: "お問い合わせ", href: "#contact" },
+                  { label: "法人の方へ", href: BUSINESS_PATH },
                   { label: "プライバシーポリシー", href: "/privacy/" },
                 ].map((item) => (
                   <a
                     key={item.href}
-                    href={item.href}
+                    href={item.href.startsWith("#") && item.href !== "#contact" ? homeHref(item.href) : item.href}
                     className="text-white/75 text-sm hover:text-white transition-colors"
                   >
                     {item.label}

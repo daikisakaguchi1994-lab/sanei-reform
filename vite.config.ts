@@ -102,6 +102,13 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    // ページごとのHTMLの入口（題名・説明文・正規URLをページごとに持つため）。中身は同じ main.tsx。
+    rollupOptions: {
+      input: {
+        main: path.resolve(import.meta.dirname, "client", "index.html"),
+        business: path.resolve(import.meta.dirname, "client", "business", "index.html"),
+      },
+    },
   },
   server: {
     port: 3000,

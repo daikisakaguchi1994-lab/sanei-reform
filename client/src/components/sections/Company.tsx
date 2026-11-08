@@ -7,6 +7,7 @@
 import { useFadeIn } from "@/hooks/useFadeIn";
 import { yearsSinceFounded } from "@/lib/company";
 import { ArrowRight, Quote } from "lucide-react";
+import { BUSINESS_PATH } from "@/lib/nav";
 
 // 会社概要（創業年・対応エリア・施工の管理体制）から抜粋。Heroの実績バッジと同じスタイル。
 const CEO_BADGES = [
@@ -134,11 +135,20 @@ export default function Company() {
         </div>
 
         {/* 法人向け案内 */}
-        <div className="fade-in bg-white rounded-lg p-5 md:p-6 mt-6 border-l-4" style={{ borderColor: "#1F3A5F" }}>
-          <p className="text-[15px]" style={{ color: "#555" }}>
-            <span className="font-bold" style={{ color: "#1F3A5F" }}>法人様のご依頼も承ります。</span>
-            賃貸不動産の原状回復工事、店舗リフォーム等、お気軽にご相談ください。
+        <div className="fade-in bg-white rounded-lg p-5 md:p-6 mt-6 border-l-4 md:flex md:items-center md:justify-between md:gap-6" style={{ borderColor: "#1F3A5F" }}>
+          <p className="text-[15px] leading-relaxed" style={{ color: "#555" }}>
+            <span className="font-bold" style={{ color: "#1F3A5F" }}>不動産会社・管理会社・店舗のご担当者さまへ。</span>
+            <br />
+            賃貸の原状回復、店舗リフォームなど、法人のご依頼も承ります。
           </p>
+          <a
+            href={BUSINESS_PATH}
+            className="mt-3 inline-flex min-h-[44px] flex-shrink-0 items-center gap-2 rounded-md px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 md:mt-0"
+            style={{ backgroundColor: "#2E7D32" }}
+          >
+            法人の方はこちら
+            <ArrowRight size={16} />
+          </a>
         </div>
 
         {/* 次章フック */}

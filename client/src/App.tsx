@@ -3,12 +3,16 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
+import Business from "./pages/Business";
 
 
 function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
+      {/* 法人の方へ。HTMLの入口は client/business/index.html（題名・説明文・正規URLが別） */}
+      <Route path={"/business/"} component={Business} />
+      <Route path={"/business"} component={Business} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

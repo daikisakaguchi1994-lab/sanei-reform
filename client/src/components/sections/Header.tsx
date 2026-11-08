@@ -5,6 +5,7 @@
  */
 import { useState, useEffect } from "react";
 import { Phone, Menu, X, MessageCircle } from "lucide-react";
+import { BUSINESS_PATH, homeHref, isBusinessPage, isHomePage } from "@/lib/nav";
 
 const NAV_ITEMS = [
   { label: "強み", href: "#strengths" },
@@ -28,6 +29,7 @@ export default function Header() {
   }, []);
 
   const handleNavClick = () => setMenuOpen(false);
+  const onBusiness = isBusinessPage();
 
   return (
     <header
@@ -51,7 +53,7 @@ export default function Header() {
       {/* メインヘッダー */}
       <div className="container flex items-center justify-between py-3 md:py-4">
         {/* ロゴ */}
-        <a href="#hero" className="flex items-center gap-2" data-replace="logo">
+        <a href={isHomePage() ? "#hero" : "/"} className="flex items-center gap-2" data-replace="logo" aria-label="株式会社サンエイ トップへ">
           {/* <!-- 編集メモ: SVGロゴを差し替え可能 --> */}
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="40" height="40" rx="6" fill="white" fillOpacity="0.15" />
@@ -65,16 +67,24 @@ export default function Header() {
         </a>
 
         {/* PC ナビゲーション */}
-        <nav className="hidden lg:flex items-center gap-6">
+        {/* 1280px 未満は項目が並びきらず折り返すため、メニューボタンにする（2026-11-08） */}
+        <nav className="hidden xl:flex items-center gap-5 2xl:gap-6 whitespace-nowrap">
           {NAV_ITEMS.map((item) => (
             <a
               key={item.href}
-              href={item.href}
+              href={homeHref(item.href)}
               className="text-white/85 text-sm hover:text-white transition-colors"
             >
               {item.label}
             </a>
           ))}
+          <a
+            href={BUSINESS_PATH}
+            aria-current={onBusiness ? "page" : undefined}
+            className={`text-sm border-b-[1.5px] border-[#9CC4A0] pb-px transition-colors hover:text-white ${onBusiness ? "text-white font-bold" : "text-white/85"}`}
+          >
+            法人の方へ
+          </a>
           <a
             href="https://line.me/ti/p/nV5rQ8rpE7"
             target="_blank"
@@ -95,7 +105,7 @@ export default function Header() {
         </nav>
 
         {/* SP: 電話＋ハンバーガー */}
-        <div className="flex items-center gap-3 lg:hidden">
+        <div className="flex items-center gap-3 xl:hidden">
           <a
             href="tel:092-407-4453"
             className="relative flex items-center gap-1.5 text-white before:absolute before:-inset-y-3 before:inset-x-0 before:content-['']"
@@ -116,18 +126,26 @@ export default function Header() {
 
       {/* SP メニュー */}
       {menuOpen && (
-        <div className="lg:hidden border-t border-white/10" style={{ backgroundColor: "#1F3A5F" }}>
+        <div className="xl:hidden border-t border-white/10" style={{ backgroundColor: "#1F3A5F" }}>
           <nav className="container py-4 flex flex-col gap-1">
             {NAV_ITEMS.map((item) => (
               <a
                 key={item.href}
-                href={item.href}
+                href={homeHref(item.href)}
                 onClick={handleNavClick}
                 className="text-white/85 text-base py-2.5 px-3 rounded hover:bg-white/10 transition-colors"
               >
                 {item.label}
               </a>
             ))}
+            <a
+              href={BUSINESS_PATH}
+              onClick={handleNavClick}
+              aria-current={onBusiness ? "page" : undefined}
+              className={`text-base py-2.5 px-3 rounded hover:bg-white/10 transition-colors ${onBusiness ? "text-white font-bold bg-white/10" : "text-white/85"}`}
+            >
+              法人の方へ（不動産会社・管理会社）
+            </a>
             <a
               href="https://line.me/ti/p/nV5rQ8rpE7"
               target="_blank"
